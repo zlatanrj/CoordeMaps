@@ -107,6 +107,7 @@
         .dark #fullscreenMapBtn:hover { background-color: #475569; }
         .dark #printMapBtn { background-color: #334155; color: #f8fafc; }
         .dark #printMapBtn:hover { background-color: #475569; }
+        
         .dark .loader { border-top-color: #3b82f6; border-color: #334155; border-top-color: #3b82f6;}
 
         .theme-selector-fixed {
@@ -690,6 +691,7 @@
             <div>
                 <label for="radiusSelect" class="block text-sm font-medium text-gray-700 dark:text-slate-100 mb-1.5">Raio de Busca:</label>
                 <select id="radiusSelect" name="radiusSelect" class="form-select w-full">
+                    <option value="0.5">500 metros</option>
                     <option value="1">1 km</option>
                     <option value="1.5">1.5 km</option>
                     <option value="2">2 km</option>
@@ -732,7 +734,7 @@
                 </button>
                 <button id="fullscreenMapBtn" class="bg-white p-2 rounded-md shadow-lg hover:bg-gray-100 transition-colors" title="Maximizar Mapa">
                     <svg id="iconEnterFullscreen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-                    <svg id="iconExitFullscreen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize" style="display:none;"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+                    <svg id="iconExitFullscreen" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-minimize" style="display:none;"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2 2v3"/></svg>
                 </button>
             </div>
         </div>
@@ -767,10 +769,16 @@
             </button>
         </div>
 
-        <button id="exportExcel" class="btn btn-secondary w-full mt-10 text-lg" disabled>
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 lucide lucide-file-spreadsheet"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M15 2v5h5"/><path d="M15 13H9"/><path d="M12 10v6"/><path d="M9 16h6"/></svg>
-            Exportar para Excel
-        </button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-10">
+            <button id="exportExcel" class="btn btn-secondary text-lg" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 lucide lucide-file-spreadsheet"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M15 2v5h5"/><path d="M15 13H9"/><path d="M12 10v6"/><path d="M9 16h6"/></svg>
+                Exportar para Excel
+            </button>
+            <button id="exportNotepad" class="btn btn-tertiary text-lg" disabled>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 lucide lucide-file-text"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+                Exportar para Bloco de Notas
+            </button>
+        </div>
     </div>
 
     <div id="customModal" class="modal">
@@ -800,7 +808,7 @@
                 </svg>
                 <span class="text-xl font-bold">CoordeMaps</span>
             </div>
-            <p class="text-white/80">&copy; 2024 CoordeMaps. Todos os direitos reservados.</p>
+            <p class="text-white/80">&copy; 2025 CoordeMaps. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -823,7 +831,7 @@
                 </svg>
                 <span class="text-lg font-bold">CoordeMaps</span>
             </div>
-            <p class="text-white/80 text-sm">&copy; 2024 CoordeMaps. Todos os direitos reservados.</p>
+            <p class="text-white/80 text-sm">&copy; 2025 CoordeMaps. Todos os direitos reservados.</p>
         </div>
     </footer>
 
@@ -1044,6 +1052,7 @@
             const mapContainerElement = document.getElementById('mapContainer');
             const fullscreenMapBtn = document.getElementById('fullscreenMapBtn');
             const printMapBtn = document.getElementById('printMapBtn');
+            
             const iconEnterFullscreen = document.getElementById('iconEnterFullscreen');
             const iconExitFullscreen = document.getElementById('iconExitFullscreen');
 
@@ -1072,6 +1081,9 @@
                 resultsTable.classList.add('hidden');
                 noResultsText.style.display = 'block';
                 exportExcelButton.disabled = true;
+                if (document.getElementById('exportNotepad')) {
+                    document.getElementById('exportNotepad').disabled = true;
+                }
                 copyCoordsButton.disabled = true;
                 copyAddressesButton.disabled = true;
                 copyButtonsContainer.style.display = 'none';
@@ -1124,6 +1136,7 @@
                 resultsBody.innerHTML = '';
                 noResultsText.style.display = 'block';
                 exportExcelButton.disabled = true;
+                exportNotepadButton.disabled = true;
                 copyCoordsButton.disabled = true;
                 copyAddressesButton.disabled = true;
                 copyButtonsContainer.style.display = 'none';
@@ -1169,18 +1182,18 @@
                 const uniquePoints = new Set();
                 uniquePoints.add(`${lat.toFixed(5)},${lon.toFixed(5)}`); // Adicionar coordenada central ao set
                 let attempts = 0;
-                const maxAttempts = NUM_STREET_POINTS * 15; 
-                const delayBetweenRequests = 1100; 
+                const maxAttempts = pointsToGenerate * 15; // Reduzir tentativas máximas
+                const delayBetweenRequests = 800; // Reduzir delay entre requests
 
                 for (let i = 0; i < pointsToGenerate && attempts < maxAttempts; attempts++) {
                     const randomPoint = getRandomPointInRadius(lat, lon, selectedRadiusKm);
-                    const pointKey = `${randomPoint.lat.toFixed(5)},${randomPoint.lng.toFixed(5)}`; 
+                    const pointKey = `${randomPoint.lat.toFixed(4)},${randomPoint.lng.toFixed(4)}`; // Reduzir precisão para mais variedade
 
                     if (!uniquePoints.has(pointKey)) {
                         uniquePoints.add(pointKey);
                         try {
                             await new Promise(resolve => setTimeout(resolve, delayBetweenRequests));
-                            const addressDetails = await reverseGeocode(randomPoint.lat, randomPoint.lng, "MeuAppDeMapa/1.0 (contato@meuapp.com)"); 
+                            const addressDetails = await reverseGeocode(randomPoint.lat, randomPoint.lng, "CoordeMaps/1.0 (contato@coordemaps.com)"); 
 
                             collectedData.push({
                                 id: collectedData.length + 1, latitude: randomPoint.lat,
@@ -1189,7 +1202,22 @@
                             updateTable();
                             i++; 
                         } catch (error) {
-                            console.warn(`Não foi possível obter o endereço para ${randomPoint.lat.toFixed(5)}, ${randomPoint.lng.toFixed(5)}: ${error.message}`);
+                            console.warn(`Geocodificação falhou para ${randomPoint.lat.toFixed(5)}, ${randomPoint.lng.toFixed(5)}: ${error.message}`);
+                            // Mesmo com erro, adicionar o ponto com informações básicas
+                            collectedData.push({
+                                id: collectedData.length + 1, latitude: randomPoint.lat,
+                                longitude: randomPoint.lng, 
+                                addressInfo: {
+                                    address: {
+                                        road: `Coordenada ${randomPoint.lat.toFixed(6)}, ${randomPoint.lng.toFixed(6)}`,
+                                        city: 'Localização não identificada'
+                                    },
+                                    display_name: `${randomPoint.lat.toFixed(6)}, ${randomPoint.lng.toFixed(6)}`
+                                }, 
+                                isCentral: false
+                            });
+                            updateTable();
+                            i++;
                         }
                     }
                 }
@@ -1197,18 +1225,19 @@
                 loader.style.display = 'none';
                 if (collectedData.length > 0) {
                     exportExcelButton.disabled = false;
+                    exportNotepadButton.disabled = false;
                     copyCoordsButton.disabled = false;
                     copyAddressesButton.disabled = false;
                     copyButtonsContainer.style.display = 'grid'; 
                     noResultsText.style.display = 'none'; 
                     resultsTable.classList.remove('hidden');
                     if (collectedData.length < selectedQuantity) {
-                        showMessage(`Geradas ${collectedData.length} de ${selectedQuantity} coordenadas. Pode haver poucas ruas distintas na área ou problemas de comunicação.`, false);
+                        showMessage(`Geradas ${collectedData.length} de ${selectedQuantity} coordenadas. Algumas coordenadas podem não ter ruas identificáveis na região.`, false);
                     } else {
                         showMessage(`${collectedData.length} coordenadas geradas com sucesso!`, false);
                     }
                 } else {
-                    showMessage("Não foi possível gerar pontos ou obter nomes de ruas. Verifique a consola ou tente uma coordenada/raio diferente.", true);
+                    showMessage("Não foi possível gerar pontos. Tente uma coordenada/raio diferente.", true);
                     resultsTable.classList.add('hidden');
                     noResultsText.style.display = 'block';
                     copyButtonsContainer.style.display = 'none';
@@ -1240,6 +1269,8 @@
                 copyToClipboard(addressesText, "Endereços copiados com sucesso!", "Falha ao copiar endereços.");
             });
 
+            const exportNotepadButton = document.getElementById('exportNotepad');
+
             exportExcelButton.addEventListener('click', () => {
                 if (collectedData.length === 0) {
                     showModal("Não há dados para exportar.");
@@ -1265,66 +1296,114 @@
                 showModal("Dados exportados para 'coordenadas_raio_detalhado.xlsx' com sucesso!");
             });
 
+            exportNotepadButton.addEventListener('click', () => {
+                if (collectedData.length === 0) {
+                    showModal("Não há dados para exportar.");
+                    return;
+                }
+                
+                let notepadContent = "=== COORDENADAS E ENDEREÇOS ===\n";
+                notepadContent += `Gerado em: ${new Date().toLocaleString('pt-BR')}\n`;
+                notepadContent += `Total de pontos: ${collectedData.length}\n\n`;
+                
+                // Primeiro todas as coordenadas
+                collectedData.forEach(item => {
+                    notepadContent += `${item.latitude.toFixed(6)}, ${item.longitude.toFixed(6)}\n`;
+                });
+                
+                // Depois todas as ruas
+                collectedData.forEach(item => {
+                    const ad = item.addressInfo.address;
+                    let streetAddress = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                    if (ad.suburb || ad.neighbourhood) streetAddress += (streetAddress ? ", " : "") + (ad.suburb || ad.neighbourhood);
+                    if (ad.city || ad.town || ad.village) streetAddress += (streetAddress ? ", " : "") + (ad.city || ad.town || ad.village);
+                    
+                    notepadContent += `${streetAddress || "Endereço não disponível"}\n`;
+                });
+                
+                // Criar e baixar arquivo .txt
+                const blob = new Blob([notepadContent], { type: 'text/plain;charset=utf-8' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = `coordenadas_${new Date().getTime()}.txt`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                showModal("Arquivo de texto exportado com sucesso!");
+            });
+
             if (fullscreenMapBtn && mapContainerElement) {
                 fullscreenMapBtn.addEventListener('click', () => toggleFullScreen(mapContainerElement));
             }
 
             if (printMapBtn) {
-                printMapBtn.addEventListener('click', () => {
-                    // Capturar screenshot do mapa em tela cheia
+                printMapBtn.addEventListener('click', async () => {
                     try {
-                        // Método usando html2canvas (simulado com canvas nativo)
-                        const mapElement = document.getElementById('map');
-                        
-                        // Criar um canvas temporário
-                        const canvas = document.createElement('canvas');
-                        const context = canvas.getContext('2d');
-                        
-                        // Definir dimensões do canvas baseado no mapa
-                        canvas.width = mapElement.offsetWidth;
-                        canvas.height = mapElement.offsetHeight;
-                        
-                        // Como alternativa, usar a API de screenshot do navegador se disponível
+                        // Verificar se a API de captura de tela está disponível
                         if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
-                            navigator.mediaDevices.getDisplayMedia({ video: true })
-                                .then(stream => {
-                                    const video = document.createElement('video');
-                                    video.srcObject = stream;
-                                    video.play();
-                                    
-                                    video.addEventListener('loadedmetadata', () => {
-                                        const canvas = document.createElement('canvas');
-                                        canvas.width = video.videoWidth;
-                                        canvas.height = video.videoHeight;
-                                        const ctx = canvas.getContext('2d');
-                                        ctx.drawImage(video, 0, 0);
-                                        
-                                        // Parar o stream
-                                        stream.getTracks().forEach(track => track.stop());
-                                        
-                                        // Download da imagem
-                                        const link = document.createElement('a');
-                                        link.download = `mapa_coordemaps_${new Date().getTime()}.png`;
-                                        link.href = canvas.toDataURL();
-                                        link.click();
-                                        
-                                        showModal("Screenshot do mapa capturado com sucesso!");
-                                    });
-                                })
-                                .catch(err => {
-                                    console.error('Erro ao capturar tela:', err);
-                                    showModal("Não foi possível capturar a tela. Verifique as permissões do navegador.");
-                                });
+                            // Solicitar captura de tela
+                            const stream = await navigator.mediaDevices.getDisplayMedia({ 
+                                video: { mediaSource: 'screen' }
+                            });
+
+                            const video = document.createElement('video');
+                            video.srcObject = stream;
+                            video.play();
+
+                            video.addEventListener('loadedmetadata', async () => {
+                                const canvas = document.createElement('canvas');
+                                canvas.width = video.videoWidth;
+                                canvas.height = video.videoHeight;
+                                const ctx = canvas.getContext('2d');
+                                ctx.drawImage(video, 0, 0);
+
+                                // Parar o stream imediatamente
+                                stream.getTracks().forEach(track => track.stop());
+
+                                try {
+                                    // Converter canvas para blob
+                                    canvas.toBlob(async (blob) => {
+                                        if (blob && navigator.clipboard && navigator.clipboard.write) {
+                                            // Copiar imagem diretamente para área de transferência
+                                            const clipboardItem = new ClipboardItem({ 'image/png': blob });
+                                            await navigator.clipboard.write([clipboardItem]);
+                                            showModal("Imagem do mapa copiada para área de transferência! Você pode colar (Ctrl+V) em qualquer aplicativo.");
+                                        } else {
+                                            // Fallback: download da imagem
+                                            const link = document.createElement('a');
+                                            link.download = `mapa_coordemaps_${new Date().getTime()}.png`;
+                                            link.href = canvas.toDataURL();
+                                            link.click();
+                                            showModal("Imagem do mapa baixada! Arquivo salvo na pasta de downloads.");
+                                        }
+                                    }, 'image/png');
+                                } catch (clipboardError) {
+                                    console.error('Erro ao copiar para área de transferência:', clipboardError);
+                                    // Fallback: download da imagem
+                                    const link = document.createElement('a');
+                                    link.download = `mapa_coordemaps_${new Date().getTime()}.png`;
+                                    link.href = canvas.toDataURL();
+                                    link.click();
+                                    showModal("Imagem do mapa baixada! Arquivo salvo na pasta de downloads.");
+                                }
+                            });
                         } else {
-                            // Fallback: tentar usar window.print() ou orientar usuário
-                            showModal("Para capturar o mapa, use Ctrl+Shift+S (Windows) ou Cmd+Shift+4 (Mac) para fazer um screenshot manual.");
+                            // Fallback para navegadores que não suportam getDisplayMedia
+                            showModal("Seu navegador não suporta captura de tela automática. Use as teclas do sistema:\n\n• Windows: Win + Shift + S ou Ctrl + Shift + S\n• Mac: Cmd + Shift + 4\n• Linux: Shift + Print Screen\n\nDepois cole onde desejar com Ctrl+V (ou Cmd+V no Mac).");
                         }
                     } catch (error) {
-                        console.error('Erro no print:', error);
-                        showModal("Erro ao tentar capturar o mapa. Use as teclas de screenshot do seu sistema operacional.");
+                        console.error('Erro na captura:', error);
+                        if (error.name === 'NotAllowedError') {
+                            showModal("Permissão de captura de tela negada. Use as teclas do sistema para capturar:\n\n• Windows: Win + Shift + S\n• Mac: Cmd + Shift + 4\n• Linux: Shift + Print Screen");
+                        } else {
+                            showModal("Erro ao capturar tela. Use as teclas do sistema:\n\n• Windows: Win + Shift + S\n• Mac: Cmd + Shift + 4\n• Linux: Shift + Print Screen");
+                        }
                     }
                 });
             }
+
+            
 
             function toggleFullScreen(element) {
                 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
@@ -1358,7 +1437,7 @@
 
             // Variável global para backup do círculo
             let circleBackup = null;
-            
+
             function handleFullscreenChange() {
                 const isElementActuallyFullscreen = !!(document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
                 const isOurMapContainerFullscreen = isElementActuallyFullscreen &&
@@ -1396,18 +1475,18 @@
                         if (printMapBtn) printMapBtn.style.display = 'none';
                     }
                 }
-                
+
                 if (map) {
                     setTimeout(() => {
                         map.invalidateSize();
-                        
+
                         // Restaurar o círculo se havia backup
                         if (circleBackup) {
                             // Remover círculo existente se houver
                             if (radiusCircle && map.hasLayer(radiusCircle)) {
                                 map.removeLayer(radiusCircle);
                             }
-                            
+
                             // Recriar o círculo a partir do backup
                             radiusCircle = L.circle(circleBackup.center, {
                                 color: circleBackup.options.color,
@@ -1432,7 +1511,7 @@
             resultsBody.innerHTML = '';
             collectedData.forEach(data => {
                 const row = resultsBody.insertRow();
-                
+
                 // Destacar a coordenada central
                 if (data.isCentral) {
                     row.style.backgroundColor = '#fef3c7';
@@ -1442,10 +1521,10 @@
                         row.style.color = '#fde047';
                     }
                 }
-                
+
                 const idCell = row.insertCell();
                 idCell.textContent = data.isCentral ? `${data.id} ⭐` : data.id;
-                
+
                 row.insertCell().textContent = `${data.latitude.toFixed(6)},${data.longitude.toFixed(6)}`;
 
                 const ad = data.addressInfo.address;
@@ -1474,8 +1553,42 @@
         function toRadians(degrees) { return degrees * Math.PI / 180; }
         function toDegrees(radians) { return radians * 180 / Math.PI; }
 
+        // Função para abreviar nomes de ruas
+        function abbreviateStreetName(streetName) {
+            if (!streetName) return streetName;
+            
+            const abbreviations = {
+                'Rua': 'R.',
+                'Avenida': 'Av.',
+                'Travessa': 'Tv.',
+                'Alameda': 'Al.',
+                'Praça': 'Pç.',
+                'Largo': 'Lg.',
+                'Estrada': 'Est.',
+                'Rodovia': 'Rod.',
+                'Via': 'V.',
+                'Beco': 'Bc.',
+                'Quadra': 'Qd.',
+                'Lote': 'Lt.',
+                'Conjunto': 'Cj.',
+                'Setor': 'St.',
+                'Distrito': 'Dt.',
+                'Fazenda': 'Fz.',
+                'Sítio': 'St.',
+                'Chácara': 'Ch.'
+            };
+            
+            let result = streetName;
+            for (const [full, abbrev] of Object.entries(abbreviations)) {
+                const regex = new RegExp(`\\b${full}\\b`, 'gi');
+                result = result.replace(regex, abbrev);
+            }
+            
+            return result;
+        }
+
         async function reverseGeocode(lat, lng, userAgent) {
-            const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=pt&addressdetails=1&zoom=18`;
+            const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}&accept-language=pt&addressdetails=1&zoom=16&extratags=1&namedetails=1`;
             try {
                 const response = await fetch(url, { headers: { 'User-Agent': userAgent } });
                 if (!response.ok) {
@@ -1484,14 +1597,41 @@
                     throw new Error(`API Nominatim: ${response.status} - ${errorData.error || response.statusText}`);
                 }
                 const data = await response.json();
+
                 if (!data.address) { 
                      console.warn("Nenhum detalhe de endereço retornado para:", lat, lng, data);
-                     return { address: {}, display_name: data.display_name || "Localização sem nome específico" };
+                     // Criar um endereço básico com as coordenadas
+                     return {
+                         address: {
+                             road: `Coordenada ${lat.toFixed(6)}, ${lng.toFixed(6)}`,
+                             city: data.display_name ? data.display_name.split(',')[0] : 'Local não identificado'
+                         },
+                         display_name: data.display_name || `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                     };
                 }
+
+                // Aplicar abreviações aos nomes das ruas
+                if (data.address.road) {
+                    data.address.road = abbreviateStreetName(data.address.road);
+                }
+                if (data.address.pedestrian) {
+                    data.address.pedestrian = abbreviateStreetName(data.address.pedestrian);
+                }
+                if (data.address.footway) {
+                    data.address.footway = abbreviateStreetName(data.address.footway);
+                }
+
                 return { address: data.address, display_name: data.display_name };
             } catch (error) {
                 console.error("Falha na geocodificação inversa:", error);
-                throw error;
+                // Retornar um endereço básico em caso de erro
+                return {
+                    address: {
+                        road: `Coordenada ${lat.toFixed(6)}, ${lng.toFixed(6)}`,
+                        city: 'Localização não identificada'
+                    },
+                    display_name: `${lat.toFixed(6)}, ${lng.toFixed(6)}`
+                };
             }
         }
 
