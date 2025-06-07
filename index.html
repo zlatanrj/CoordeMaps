@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -107,7 +106,7 @@
         .dark #fullscreenMapBtn:hover { background-color: #475569; }
         .dark #printMapBtn { background-color: #334155; color: #f8fafc; }
         .dark #printMapBtn:hover { background-color: #475569; }
-        
+
         .dark .loader { border-top-color: #3b82f6; border-color: #334155; border-top-color: #3b82f6;}
 
         .theme-selector-fixed {
@@ -137,6 +136,273 @@
             z-index: 100000 !important;
             transform: none !important;
             will-change: auto;
+        }
+
+        /* Estilos para o vídeo de demonstração */
+        .demo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .demo-typing {
+            height: 20px;
+        }
+
+        .typing-text {
+            font-family: monospace;
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+            color: #4f46e5;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .demo-map {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+            position: relative;
+        }
+
+        .point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ef4444;
+            border: 2px solid white;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .point-center {
+            background: #fbbf24;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10;
+        }
+
+        .point-1 { top: 30%; left: 25%; }
+        .point-2 { top: 20%; right: 30%; }
+        .point-3 { bottom: 35%; left: 20%; }
+        .point-4 { bottom: 25%; right: 25%; }
+        .point-5 { top: 60%; left: 70%; }
+
+        .demo-radius-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 180px;
+            height: 180px;
+            border: 3px solid #3b82f6;
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .demo-result-item {
+            height: 8px;
+            background: linear-gradient(90deg, #e5e7eb 0%, #d1d5db 100%);
+            border-radius: 4px;
+            margin-bottom: 6px;
+            width: 0%;
+            opacity: 0;
+        }
+
+        .demo-result-item:nth-child(1) { width: 85%; }
+        .demo-result-item:nth-child(2) { width: 75%; }
+        .demo-result-item:nth-child(3) { width: 90%; }
+
+        /* Animações em sequência */
+        .demo-scene {
+            animation: demoSequence 12s infinite;
+        }
+
+        @keyframes demoSequence {
+            /* Fase 1: Digitação */
+            0% { }
+            5% { }
+            
+            /* Fase 2: Mostrar círculo */
+            15% { }
+            20% { }
+            
+            /* Fase 3: Mostrar pontos */
+            25% { }
+            40% { }
+            
+            /* Fase 4: Mostrar resultados */
+            50% { }
+            70% { }
+            
+            /* Fase 5: Reset */
+            85% { }
+            100% { }
+        }
+
+        /* Animação da digitação */
+        .typing-text::after {
+            content: '';
+            animation: typeText 12s infinite;
+        }
+
+        @keyframes typeText {
+            0%, 5% { content: ''; }
+            8% { content: '-'; }
+            10% { content: '-2'; }
+            12% { content: '-22'; }
+            14% { content: '-22.'; }
+            16% { content: '-22.9'; }
+            18% { content: '-22.90'; }
+            20% { content: '-22.906'; }
+            22% { content: '-22.9068'; }
+            24% { content: '-22.9068,'; }
+            26% { content: '-22.9068, '; }
+            28% { content: '-22.9068, -'; }
+            30% { content: '-22.9068, -4'; }
+            32% { content: '-22.9068, -43'; }
+            34% { content: '-22.9068, -43.'; }
+            36% { content: '-22.9068, -43.1'; }
+            38% { content: '-22.9068, -43.17'; }
+            40% { content: '-22.9068, -43.172'; }
+            42% { content: '-22.9068, -43.1729'; }
+            85%, 100% { content: '-22.9068, -43.1729'; }
+        }
+
+        /* Animação do círculo */
+        .demo-radius-circle {
+            animation: showCircle 12s infinite;
+        }
+
+        @keyframes showCircle {
+            0%, 15% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            20% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            85% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+            90%, 100% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Animação dos pontos */
+        .point-center {
+            animation: showPointCenter 12s infinite;
+        }
+
+        @keyframes showPointCenter {
+            0%, 22% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            25% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            85% { 
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+            90%, 100% { 
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .point-1 { animation: showPoint1 12s infinite; }
+        .point-2 { animation: showPoint2 12s infinite; }
+        .point-3 { animation: showPoint3 12s infinite; }
+        .point-4 { animation: showPoint4 12s infinite; }
+        .point-5 { animation: showPoint5 12s infinite; }
+
+        @keyframes showPoint1 {
+            0%, 27% { transform: scale(0); opacity: 0; }
+            30% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            90%, 100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes showPoint2 {
+            0%, 29% { transform: scale(0); opacity: 0; }
+            32% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            90%, 100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes showPoint3 {
+            0%, 31% { transform: scale(0); opacity: 0; }
+            34% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            90%, 100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes showPoint4 {
+            0%, 33% { transform: scale(0); opacity: 0; }
+            36% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            90%, 100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes showPoint5 {
+            0%, 35% { transform: scale(0); opacity: 0; }
+            38% { transform: scale(1); opacity: 1; }
+            85% { transform: scale(1); opacity: 1; }
+            90%, 100% { transform: scale(0); opacity: 0; }
+        }
+
+        /* Animação dos resultados */
+        .demo-result-item:nth-child(1) { animation: showResult1 12s infinite; }
+        .demo-result-item:nth-child(2) { animation: showResult2 12s infinite; }
+        .demo-result-item:nth-child(3) { animation: showResult3 12s infinite; }
+
+        @keyframes showResult1 {
+            0%, 45% { width: 0%; opacity: 0; }
+            50% { width: 85%; opacity: 1; }
+            85% { width: 85%; opacity: 1; }
+            90%, 100% { width: 0%; opacity: 0; }
+        }
+
+        @keyframes showResult2 {
+            0%, 47% { width: 0%; opacity: 0; }
+            52% { width: 75%; opacity: 1; }
+            85% { width: 75%; opacity: 1; }
+            90%, 100% { width: 0%; opacity: 0; }
+        }
+
+        @keyframes showResult3 {
+            0%, 49% { width: 0%; opacity: 0; }
+            54% { width: 90%; opacity: 1; }
+            85% { width: 90%; opacity: 1; }
+            90%, 100% { width: 0%; opacity: 0; }
+        }
+
+        /* Pausa a animação quando o usuário passa o mouse */
+        .demo-container:hover .demo-scene,
+        .demo-container:hover .typing-text::after,
+        .demo-container:hover .cursor,
+        .demo-container:hover .demo-radius-circle,
+        .demo-container:hover .point,
+        .demo-container:hover .demo-result-item {
+            animation-play-state: paused;
         }
 
         #loginContainer {
@@ -296,24 +562,15 @@
     <nav id="mainNavigation" class="navbar-glass fixed top-0 left-0 right-0 z-50 p-4" style="display: none;">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                    <defs>
-                        <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
-                            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-                        </pattern>
-                    </defs>
-                    <rect width="38" height="38" x="1" y="1" fill="url(#grid)"/>
-                    <g transform="translate(20,15)">
-                        <path d="M0 0 C-3 0 -5 2 -5 5 C-5 8 0 13 0 13 S5 8 5 5 C5 2 3 0 0 0 Z" fill="#ffffff" stroke="rgba(59,130,246,0.8)" stroke-width="1"/>
-                        <circle cx="0" cy="5" r="2" fill="#3b82f6"/>
-                    </g>
-                    <circle cx="8" cy="10" r="1.5" fill="#10b981" opacity="0.8"/>
-                    <circle cx="32" cy="12" r="1.5" fill="#10b981" opacity="0.8"/>
-                    <circle cx="12" cy="30" r="1.5" fill="#10b981" opacity="0.8"/>
-                    <circle cx="28" cy="28" r="1.5" fill="#10b981" opacity="0.8"/>
-                </svg>
-                <h1 class="text-2xl font-bold text-white">CoordeMaps</h1>
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl px-3 py-2 flex items-center space-x-2">
+                    <div class="bg-white/20 rounded-md p-1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                        </svg>
+                    </div>
+                    <h1 class="text-xl font-bold text-white">CoordeMaps</h1>
+                </div>
             </div>
 
             <div class="hidden md:flex space-x-6">
@@ -365,27 +622,97 @@
             <div class="container mx-auto max-w-4xl">
                 <div class="card-glass rounded-3xl p-8 md:p-12 shadow-2xl text-center">
                     <div class="mb-8">
-                        <svg width="80" height="80" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-6">
-                            <rect width="40" height="40" rx="8" fill="rgba(102,126,234,0.1)" stroke="rgba(102,126,234,0.3)" stroke-width="1"/>
-                            <defs>
-                                <pattern id="grid-home" width="8" height="8" patternUnits="userSpaceOnUse">
-                                    <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(102,126,234,0.2)" stroke-width="0.5"/>
-                                </pattern>
-                            </defs>
-                            <rect width="38" height="38" x="1" y="1" fill="url(#grid-home)"/>
-                            <g transform="translate(20,15)">
-                                <path d="M0 0 C-3 0 -5 2 -5 5 C-5 8 0 13 0 13 S5 8 5 5 C5 2 3 0 0 0 Z" fill="#667eea" stroke="rgba(59,130,246,0.8)" stroke-width="1"/>
-                                <circle cx="0" cy="5" r="2" fill="#ffffff"/>
-                            </g>
-                            <circle cx="8" cy="10" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="32" cy="12" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="12" cy="30" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="28" cy="28" r="1.5" fill="#10b981" opacity="0.8"/>
-                        </svg>
-                        <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">CoordeMaps</h1>
+                        <div class="flex items-center justify-center mb-6">
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl px-6 py-3 flex items-center space-x-3 shadow-2xl">
+                                <div class="bg-white/20 rounded-lg p-2">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+                                        <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                                    </svg>
+                                </div>
+                                <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">CoordeMaps</h1>
+                            </div>
+                        </div>
                         <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
                             Sistema avançado de coordenadas e mapeamento. Gerencie, visualize e analise dados geográficos com precisão e facilidade.
                         </p>
+                        
+                        <!-- Vídeo de Apresentação -->
+                        <div class="bg-white/70 backdrop-blur-lg rounded-2xl p-6 mb-8 max-w-4xl mx-auto">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">🎥 Veja como funciona</h3>
+                            <div class="demo-container bg-gray-100 rounded-lg overflow-hidden shadow-lg">
+                                <div class="demo-header bg-gradient-to-r from-blue-500 to-purple-600 p-3 text-white text-sm font-medium flex items-center justify-between">
+                                    <span>CoordeMaps - Demonstração</span>
+                                    <div class="flex space-x-1">
+                                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                                    </div>
+                                </div>
+                                <div class="demo-content h-80 relative overflow-hidden">
+                                    <!-- Simulação de Interface -->
+                                    <div class="demo-scene absolute inset-0 flex flex-col p-4">
+                                        <!-- Barra de coordenadas animada -->
+                                        <div class="demo-input-bar bg-white rounded-lg p-3 mb-4 shadow-sm border-2 border-blue-200">
+                                            <div class="demo-typing text-gray-600 text-sm">
+                                                <span class="typing-text"></span>
+                                                <span class="cursor">|</span>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Mapa simulado -->
+                                        <div class="demo-map bg-green-100 rounded-lg flex-1 relative overflow-hidden">
+                                            <div class="map-grid absolute inset-0 opacity-20">
+                                                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                                                    <defs>
+                                                        <pattern id="demo-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#10b981" stroke-width="1"/>
+                                                        </pattern>
+                                                    </defs>
+                                                    <rect width="100%" height="100%" fill="url(#demo-grid)"/>
+                                                </svg>
+                                            </div>
+                                            
+                                            <!-- Pontos animados -->
+                                            <div class="demo-points absolute inset-0">
+                                                <div class="point point-1"></div>
+                                                <div class="point point-2"></div>
+                                                <div class="point point-3"></div>
+                                                <div class="point point-4"></div>
+                                                <div class="point point-5"></div>
+                                                <div class="point point-center"></div>
+                                            </div>
+                                            
+                                            <!-- Círculo de raio -->
+                                            <div class="demo-radius-circle"></div>
+                                        </div>
+                                        
+                                        <!-- Resultados animados -->
+                                        <div class="demo-results bg-white rounded-lg mt-4 p-3 shadow-sm">
+                                            <div class="demo-result-item"></div>
+                                            <div class="demo-result-item"></div>
+                                            <div class="demo-result-item"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Legendas dos passos -->
+                            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                                <div class="text-center p-3 bg-blue-50 rounded-lg">
+                                    <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">1</div>
+                                    <p class="text-gray-700"><strong>Digite coordenadas</strong><br>ou clique no mapa</p>
+                                </div>
+                                <div class="text-center p-3 bg-green-50 rounded-lg">
+                                    <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">2</div>
+                                    <p class="text-gray-700"><strong>Escolha raio e quantidade</strong><br>de coordenadas</p>
+                                </div>
+                                <div class="text-center p-3 bg-purple-50 rounded-lg">
+                                    <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">3</div>
+                                    <p class="text-gray-700"><strong>Exporte dados</strong><br>para Excel ou texto</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -646,27 +973,13 @@
         <div class="flex justify-between items-center mb-8">
             <div class="flex items-center">
                 <div class="inline-block p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 mr-4">
-                    <div class="flex items-center space-x-3">
-                        <svg width="48" height="48" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="40" height="40" rx="8" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                            <defs>
-                                <pattern id="grid-main" width="8" height="8" patternUnits="userSpaceOnUse">
-                                    <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"/>
-                                </pattern>
-                            </defs>
-                            <rect width="38" height="38" x="1" y="1" fill="url(#grid-main)"/>
-                            <g transform="translate(20,15)">
-                                <path d="M0 0 C-3 0 -5 2 -5 5 C-5 8 0 13 0 13 S5 8 5 5 C5 2 3 0 0 0 Z" fill="#ffffff" stroke="rgba(59,130,246,0.8)" stroke-width="1"/>
-                                <circle cx="0" cy="5" r="2" fill="#3b82f6"/>
-                            </g>
-                            <circle cx="8" cy="10" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="32" cy="12" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="12" cy="30" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <circle cx="28" cy="28" r="1.5" fill="#10b981" opacity="0.8"/>
-                            <path d="M8 10 L20 15 M32 12 L20 15 M12 30 L20 15 M28 28 L20 15" stroke="rgba(255,255,255,0.3)" stroke-width="0.8" opacity="0.6"/>
-                            <text x="2" y="38" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.7)">0°</text>
-                            <text x="34" y="38" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.7)">90°</text>
-                        </svg>
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-white/20 rounded-xl p-3">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+                                <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                            </svg>
+                        </div>
                         <h1 class="text-4xl md:text-5xl font-bold text-white mb-0">CoordeMaps</h1>
                     </div>
                 </div>
@@ -683,7 +996,7 @@
         <div class="mb-8 text-center">
             <p class="text-gray-600 dark:text-slate-100 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
                 Clique no mapa para definir o centro ou insira latitude e longitude (ex: -22.9068, -43.1729).
-                Escolha a quantidade de coordenadas (2-6), o raio de busca e visualize. A coordenada pesquisada sempre será incluída nos resultados.
+                Escolha a quantidade de coordenadas (2-10), o raio de busca e visualize. A coordenada pesquisada sempre será incluída nos resultados.
             </p>
         </div>
 
@@ -709,8 +1022,12 @@
                     <option value="2">2 coordenadas</option>
                     <option value="3">3 coordenadas</option>
                     <option value="4">4 coordenadas</option>
-                    <option value="5" selected>5 coordenadas</option>
+                    <option value="5">5 coordenadas</option>
                     <option value="6">6 coordenadas</option>
+                    <option value="7">7 coordenadas</option>
+                    <option value="8">8 coordenadas</option>
+                    <option value="9">9 coordenadas</option>
+                    <option value="10" selected>10 coordenadas</option>
                 </select>
             </div>
             <div>
@@ -793,20 +1110,15 @@
     <footer id="mainFooter" class="bg-black/20 backdrop-blur-lg text-white py-8">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-3 mb-4">
-                <svg width="32" height="32" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                    <defs>
-                        <pattern id="grid-footer" width="8" height="8" patternUnits="userSpaceOnUse">
-                            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-                        </pattern>
-                    </defs>
-                    <rect width="38" height="38" x="1" y="1" fill="url(#grid-footer)"/>
-                    <g transform="translate(20,15)">
-                        <path d="M0 0 C-3 0 -5 2 -5 5 C-5 8 0 13 0 13 S5 8 5 5 C5 2 3 0 0 0 Z" fill="#ffffff" stroke="rgba(59,130,246,0.8)" stroke-width="1"/>
-                        <circle cx="0" cy="5" r="2" fill="#3b82f6"/>
-                    </g>
-                </svg>
-                <span class="text-xl font-bold">CoordeMaps</span>
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg px-3 py-2 flex items-center space-x-2">
+                    <div class="bg-white/20 rounded-md p-1">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                        </svg>
+                    </div>
+                    <span class="text-lg font-bold text-white">CoordeMaps</span>
+                </div>
             </div>
             <p class="text-white/80">&copy; 2025 CoordeMaps. Todos os direitos reservados.</p>
         </div>
@@ -816,20 +1128,15 @@
     <footer id="mappingFooter" class="bg-black/20 backdrop-blur-lg text-white py-6 mt-8" style="display: none;">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-3 mb-3">
-                <svg width="24" height="24" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="40" height="40" rx="8" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                    <defs>
-                        <pattern id="grid-footer-mapping" width="8" height="8" patternUnits="userSpaceOnUse">
-                            <path d="M 8 0 L 0 0 0 8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
-                        </pattern>
-                    </defs>
-                    <rect width="38" height="38" x="1" y="1" fill="url(#grid-footer-mapping)"/>
-                    <g transform="translate(20,15)">
-                        <path d="M0 0 C-3 0 -5 2 -5 5 C-5 8 0 13 0 13 S5 8 5 5 C5 2 3 0 0 0 Z" fill="#ffffff" stroke="rgba(59,130,246,0.8)" stroke-width="1"/>
-                        <circle cx="0" cy="5" r="2" fill="#3b82f6"/>
-                    </g>
-                </svg>
-                <span class="text-lg font-bold">CoordeMaps</span>
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg px-2 py-1 flex items-center space-x-2">
+                    <div class="bg-white/20 rounded-sm p-1">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
+                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                        </svg>
+                    </div>
+                    <span class="text-md font-bold text-white">CoordeMaps</span>
+                </div>
             </div>
             <p class="text-white/80 text-sm">&copy; 2025 CoordeMaps. Todos os direitos reservados.</p>
         </div>
@@ -1052,7 +1359,7 @@
             const mapContainerElement = document.getElementById('mapContainer');
             const fullscreenMapBtn = document.getElementById('fullscreenMapBtn');
             const printMapBtn = document.getElementById('printMapBtn');
-            
+
             const iconEnterFullscreen = document.getElementById('iconEnterFullscreen');
             const iconExitFullscreen = document.getElementById('iconExitFullscreen');
 
@@ -1253,20 +1560,35 @@
                 copyToClipboard(coordsText, "Coordenadas copiadas com sucesso!", "Falha ao copiar coordenadas.");
             });
 
+            
             copyAddressesButton.addEventListener('click', () => {
                 if (collectedData.length === 0) {
                     showModal("Nenhum endereço para copiar.");
                     return;
                 }
-                const addressesText = collectedData.map(data => {
+
+                let addressText = "=== ENDEREÇOS DETALHADOS ===\n\n";
+                // Usar todos os 10 endereços coletados para detalhamento
+                collectedData.forEach((data, index) => {
                     const ad = data.addressInfo.address;
-                    let displayAddress = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    if (ad.house_number) displayAddress += `, ${ad.house_number}`;
-                    if (ad.suburb || ad.neighbourhood) displayAddress += (displayAddress ? ", " : "") + (ad.suburb || ad.neighbourhood);
-                    if (ad.city || ad.town || ad.village) displayAddress += (displayAddress ? ", " : "") + (ad.city || ad.town || ad.village);
-                    return displayAddress || data.addressInfo.display_name || "Endereço não disponível";
-                }).join('\n');
-                copyToClipboard(addressesText, "Endereços copiados com sucesso!", "Falha ao copiar endereços.");
+                    let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
+                    
+                    let displayAddress = "";
+                    if (streetName && location) {
+                        displayAddress = `${streetName} - ${location}`;
+                    } else if (streetName) {
+                        displayAddress = streetName;
+                    } else if (location) {
+                        displayAddress = location;
+                    } else {
+                        displayAddress = "Endereço não disponível";
+                    }
+
+                    addressText += `[${index + 1}] ${displayAddress}\n`;
+                });
+
+                copyToClipboard(addressText, "Endereços copiados com sucesso!", "Falha ao copiar endereços.");
             });
 
             const exportNotepadButton = document.getElementById('exportNotepad');
@@ -1278,14 +1600,23 @@
                 }
                 const worksheetData = collectedData.map(item => {
                     const ad = item.addressInfo.address;
-                    let excelAddress = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    if (ad.house_number) excelAddress += `, ${ad.house_number}`;
-                    if (ad.suburb || ad.neighbourhood) excelAddress += (excelAddress ? ", " : "") + (ad.suburb || ad.neighbourhood);
-                    if (ad.city || ad.town || ad.village) excelAddress += (excelAddress ? ", " : "") + (ad.city || ad.town || ad.village);
-                    if (ad.postcode) excelAddress += (excelAddress ? " - " : "") + ad.postcode;
+                    let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
+                    
+                    let excelAddress = "";
+                    if (streetName && location) {
+                        excelAddress = `${streetName} - ${location}`;
+                    } else if (streetName) {
+                        excelAddress = streetName;
+                    } else if (location) {
+                        excelAddress = location;
+                    } else {
+                        excelAddress = item.addressInfo.display_name || "Não disponível";
+                    }
+                    
                     return {
                         'ID': item.id, 'Latitude': item.latitude.toFixed(6), 'Longitude': item.longitude.toFixed(6),
-                        'Endereço Completo': excelAddress || item.addressInfo.display_name || "Não disponível"
+                        'Endereço Completo': excelAddress
                     };
                 });
                 const worksheet = XLSX.utils.json_to_sheet(worksheetData);
@@ -1301,26 +1632,36 @@
                     showModal("Não há dados para exportar.");
                     return;
                 }
-                
+
                 let notepadContent = "=== COORDENADAS E ENDEREÇOS ===\n";
                 notepadContent += `Gerado em: ${new Date().toLocaleString('pt-BR')}\n`;
                 notepadContent += `Total de pontos: ${collectedData.length}\n\n`;
-                
+
                 // Primeiro todas as coordenadas
                 collectedData.forEach(item => {
                     notepadContent += `${item.latitude.toFixed(6)}, ${item.longitude.toFixed(6)}\n`;
                 });
-                
+
                 // Depois todas as ruas
                 collectedData.forEach(item => {
                     const ad = item.addressInfo.address;
-                    let streetAddress = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    if (ad.suburb || ad.neighbourhood) streetAddress += (streetAddress ? ", " : "") + (ad.suburb || ad.neighbourhood);
-                    if (ad.city || ad.town || ad.village) streetAddress += (streetAddress ? ", " : "") + (ad.city || ad.town || ad.village);
+                    let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
                     
-                    notepadContent += `${streetAddress || "Endereço não disponível"}\n`;
+                    let streetAddress = "";
+                    if (streetName && location) {
+                        streetAddress = `${streetName} - ${location}`;
+                    } else if (streetName) {
+                        streetAddress = streetName;
+                    } else if (location) {
+                        streetAddress = location;
+                    } else {
+                        streetAddress = "Endereço não disponível";
+                    }
+
+                    notepadContent += `${streetAddress}\n`;
                 });
-                
+
                 // Criar e baixar arquivo .txt
                 const blob = new Blob([notepadContent], { type: 'text/plain;charset=utf-8' });
                 const link = document.createElement('a');
@@ -1329,7 +1670,7 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                
+
                 showModal("Arquivo de texto exportado com sucesso!");
             });
 
@@ -1403,7 +1744,7 @@
                 });
             }
 
-            
+
 
             function toggleFullScreen(element) {
                 if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement ) {
@@ -1528,13 +1869,22 @@
                 row.insertCell().textContent = `${data.latitude.toFixed(6)},${data.longitude.toFixed(6)}`;
 
                 const ad = data.addressInfo.address;
-                let displayAddress = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                if (ad.house_number) displayAddress += `, ${ad.house_number}`;
-                if (ad.suburb || ad.neighbourhood) displayAddress += (displayAddress ? ", " : "") + (ad.suburb || ad.neighbourhood);
-                if (ad.city || ad.town || ad.village) displayAddress += (displayAddress ? ", " : "") + (ad.city || ad.town || ad.village);
+                let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
+                
+                let displayAddress = "";
+                if (streetName && location) {
+                    displayAddress = `${streetName} - ${location}`;
+                } else if (streetName) {
+                    displayAddress = streetName;
+                } else if (location) {
+                    displayAddress = location;
+                } else {
+                    displayAddress = data.addressInfo.display_name || "Endereço não disponível";
+                }
 
                 const addressCell = row.insertCell();
-                addressCell.textContent = displayAddress || data.addressInfo.display_name || "Endereço não disponível";
+                addressCell.textContent = displayAddress;
                 if (data.isCentral && !displayAddress) {
                     addressCell.textContent = "Coordenada Central Pesquisada";
                 }
@@ -1556,7 +1906,7 @@
         // Função para abreviar nomes de ruas
         function abbreviateStreetName(streetName) {
             if (!streetName) return streetName;
-            
+
             const abbreviations = {
                 'Rua': 'R.',
                 'Avenida': 'Av.',
@@ -1577,13 +1927,13 @@
                 'Sítio': 'St.',
                 'Chácara': 'Ch.'
             };
-            
+
             let result = streetName;
             for (const [full, abbrev] of Object.entries(abbreviations)) {
                 const regex = new RegExp(`\\b${full}\\b`, 'gi');
                 result = result.replace(regex, abbrev);
             }
-            
+
             return result;
         }
 
