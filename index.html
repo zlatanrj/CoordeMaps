@@ -22,16 +22,7 @@
             transition: all 0.3s ease;
         }
 
-        .dark body { 
-            background: linear-gradient(135deg, #1e3a8a 0%, #1f2937 50%, #0f172a 100%); 
-            color: #f8fafc; 
-        }
-
-        .dark #mainContentContainer, .dark #loginContainer { 
-            background: linear-gradient(145deg, #1e293b 0%, #334155 100%); 
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-        }
+        
 
         .navbar-glass {
             background: rgba(255, 255, 255, 0.1);
@@ -80,63 +71,7 @@
             transform: scale(1.1);
         }
 
-        /* Estilos para aplicação de mapeamento */
-        .dark .form-input, .dark .form-select, .dark #themeSwitcher {
-            background-color: #334155; border-color: #475569; color: #f8fafc;
-        }
-        .dark .form-input::placeholder { color: #cbd5e1; }
-        .dark .form-input:focus, .dark .form-select:focus, .dark #themeSwitcher:focus {
-            border-color: #3b82f6; box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
-        }
-        .dark .btn-primary { background-color: #3b82f6; }
-        .dark .btn-primary:hover { background-color: #2563eb; }
-        .dark .btn-secondary { background-color: #14b8a6; }
-        .dark .btn-secondary:hover { background-color: #0d9488; }
-        .dark .btn-tertiary { background-color: #64748b; color: white; } 
-        .dark .btn-tertiary:hover { background-color: #475569; } 
-        .dark .btn-tertiary:disabled { background-color: #334155; color: #64748b; } 
-        .dark .btn-modal { background-color: #3b82f6; }
-        .dark .btn-modal:hover { background-color: #2563eb; }
-        .dark #resultsTable thead { background-color: #334155; }
-        .dark #resultsTable tbody tr:nth-child(even) { background-color: #2c3a4f; }
-        .dark #resultsTable tbody tr:hover { background-color: #475569; }
-        .dark .modal-content { background-color: #1e293b; }
-        .dark .leaflet-container { background-color: #334155; }
-        .dark #fullscreenMapBtn { background-color: #334155; color: #f8fafc; }
-        .dark #fullscreenMapBtn:hover { background-color: #475569; }
-        .dark #printMapBtn { background-color: #334155; color: #f8fafc; }
-        .dark #printMapBtn:hover { background-color: #475569; }
-
-        .dark .loader { border-top-color: #3b82f6; border-color: #334155; border-top-color: #3b82f6;}
-
-        .theme-selector-fixed {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            z-index: 99999 !important;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            padding: 8px 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: none !important;
-            will-change: auto;
-        }
-
-        .dark .theme-selector-fixed {
-            background: rgba(30, 41, 59, 0.95);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .theme-toggle-button-fixed {
-            position: fixed !important;
-            top: 20px !important;
-            right: 20px !important;
-            z-index: 100000 !important;
-            transform: none !important;
-            will-change: auto;
-        }
+        
 
         /* Estilos para o vídeo de demonstração */
         .demo-container {
@@ -233,19 +168,19 @@
             /* Fase 1: Digitação */
             0% { }
             5% { }
-            
+
             /* Fase 2: Mostrar círculo */
             15% { }
             20% { }
-            
+
             /* Fase 3: Mostrar pontos */
             25% { }
             40% { }
-            
+
             /* Fase 4: Mostrar resultados */
             50% { }
             70% { }
-            
+
             /* Fase 5: Reset */
             85% { }
             100% { }
@@ -416,11 +351,7 @@
             border: 1px solid #f87171;
         }
 
-        .dark #loginError {
-            background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 100%);
-            border-color: #dc2626;
-            color: #fca5a5;
-        }
+        
 
         #map {
             height: 500px; width: 100%; border-radius: 20px; margin-bottom: 2rem;
@@ -636,7 +567,7 @@
                         <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
                             Sistema avançado de coordenadas e mapeamento. Gerencie, visualize e analise dados geográficos com precisão e facilidade.
                         </p>
-                        
+
                         <!-- Vídeo de Apresentação -->
                         <div class="bg-white/70 backdrop-blur-lg rounded-2xl p-6 mb-8 max-w-4xl mx-auto">
                             <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">🎥 Veja como funciona</h3>
@@ -659,7 +590,7 @@
                                                 <span class="cursor">|</span>
                                             </div>
                                         </div>
-                                        
+
                                         <!-- Mapa simulado -->
                                         <div class="demo-map bg-green-100 rounded-lg flex-1 relative overflow-hidden">
                                             <div class="map-grid absolute inset-0 opacity-20">
@@ -672,7 +603,7 @@
                                                     <rect width="100%" height="100%" fill="url(#demo-grid)"/>
                                                 </svg>
                                             </div>
-                                            
+
                                             <!-- Pontos animados -->
                                             <div class="demo-points absolute inset-0">
                                                 <div class="point point-1"></div>
@@ -682,11 +613,11 @@
                                                 <div class="point point-5"></div>
                                                 <div class="point point-center"></div>
                                             </div>
-                                            
+
                                             <!-- Círculo de raio -->
                                             <div class="demo-radius-circle"></div>
                                         </div>
-                                        
+
                                         <!-- Resultados animados -->
                                         <div class="demo-results bg-white rounded-lg mt-4 p-3 shadow-sm">
                                             <div class="demo-result-item"></div>
@@ -696,20 +627,20 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Legendas dos passos -->
                             <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                                 <div class="text-center p-3 bg-blue-50 rounded-lg">
                                     <div class="w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">1</div>
-                                    <p class="text-gray-700"><strong>Digite coordenadas</strong><br>ou clique no mapa</p>
+                                    <p class="text-gray-700"><strong>Digite as Coordenadas</strong><br>ou clique no mapa</p>
                                 </div>
                                 <div class="text-center p-3 bg-green-50 rounded-lg">
                                     <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">2</div>
-                                    <p class="text-gray-700"><strong>Escolha raio e quantidade</strong><br>de coordenadas</p>
+                                    <p class="text-gray-700"><strong>Escolha o tamanho do raio e a quantidade</strong><br>de coordenadas</p>
                                 </div>
                                 <div class="text-center p-3 bg-purple-50 rounded-lg">
                                     <div class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center mx-auto mb-2 text-sm font-bold">3</div>
-                                    <p class="text-gray-700"><strong>Exporte dados</strong><br>para Excel ou texto</p>
+                                    <p class="text-gray-700"><strong>Exporte os dados</strong><br>para excel ou texto</p>
                                 </div>
                             </div>
                         </div>
@@ -865,7 +796,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
                             </svg>
                             <h3 class="font-semibold text-gray-800">E-mail</h3>
-                            <p class="text-sm text-gray-600">contato@coordemaps.com</p>
+                            <p class="text-sm text-gray-600">coordemaps@gmail.com</p>
                         </div>
 
                         <div class="bg-white/50 p-4 rounded-xl">
@@ -873,7 +804,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
                             <h3 class="font-semibold text-gray-800">Telefone</h3>
-                            <p class="text-sm text-gray-600">(11) 9999-9999</p>
+                            <p class="text-sm text-gray-600">(21) 96556-8914</p>
                         </div>
 
                         <div class="bg-white/50 p-4 rounded-xl">
@@ -949,24 +880,7 @@
 
 
 
-    <!-- Botão para mostrar/esconder seletor de tema -->
-    <div class="theme-toggle-button-fixed" style="position: fixed; top: 20px; right: 20px; z-index: 10000;">
-        <button id="themeToggleBtn" class="bg-white dark:bg-slate-800 p-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-slate-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gray-700 dark:text-slate-300">
-                <circle cx="12" cy="12" r="5"/>
-                <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-            </svg>
-        </button>
-    </div>
-
-    <!-- Seletor de Tema Fixo -->
-    <div id="themeSelectorContainer" class="theme-selector-fixed" style="display: none;">
-        <label for="themeSwitcher" class="sr-only">Escolher Tema</label>
-        <select id="themeSwitcher" class="form-select rounded-md shadow-sm text-sm py-1.5 px-2 focus:ring-indigo-500 focus:border-indigo-500 bg-transparent border-0">
-            <option value="light">☀️ Claro</option>
-            <option value="dark">🌙 Escuro</option>
-        </select>
-    </div>
+    
 
     <!-- Aplicação Principal (inicialmente oculta) -->
     <div id="mainContentContainer" class="container mx-auto max-w-6xl bg-white/90 backdrop-blur-xl dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl border border-white/20" style="display: none;">
@@ -983,7 +897,7 @@
                         <h1 class="text-4xl md:text-5xl font-bold text-white mb-0">CoordeMaps</h1>
                     </div>
                 </div>
-                <span id="welcomeUser" class="text-lg font-medium text-gray-700 dark:text-slate-100"></span>
+                <span id="welcomeUser" class="text-lg font-medium text-gray-700"></span>
             </div>
             <button id="logoutButton" class="btn btn-tertiary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2">
@@ -1002,7 +916,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 mb-10">
             <div>
-                <label for="radiusSelect" class="block text-sm font-medium text-gray-700 dark:text-slate-100 mb-1.5">Raio de Busca:</label>
+                <label for="radiusSelect" class="block text-sm font-medium text-gray-700 mb-1.5">Raio de Busca:</label>
                 <select id="radiusSelect" name="radiusSelect" class="form-select w-full">
                     <option value="0.5">500 metros</option>
                     <option value="1">1 km</option>
@@ -1017,7 +931,7 @@
                 </select>
             </div>
             <div>
-                <label for="quantitySelect" class="block text-sm font-medium text-gray-700 dark:text-slate-100 mb-1.5">Quantidade de Coordenadas:</label>
+                <label for="quantitySelect" class="block text-sm font-medium text-gray-700 mb-1.5">Quantidade de Coordenadas:</label>
                 <select id="quantitySelect" name="quantitySelect" class="form-select w-full">
                     <option value="2">2 coordenadas</option>
                     <option value="3">3 coordenadas</option>
@@ -1031,7 +945,7 @@
                 </select>
             </div>
             <div>
-                <label for="coordSearch" class="block text-sm font-medium text-gray-700 dark:text-slate-100 mb-1.5">Coordenadas Centrais (Latitude, Longitude):</label>
+                <label for="coordSearch" class="block text-sm font-medium text-gray-700 mb-1.5">Coordenadas Centrais (Latitude, Longitude):</label>
                 <input type="text" id="coordSearch" name="coordSearch" placeholder="-22.9068, -43.1729" class="form-input w-full">
             </div>
         </div>
@@ -1057,22 +971,22 @@
         </div>
 
         <div id="loader" class="loader" style="display: none;"></div>
-        <div id="messageArea" class="mb-6 text-sm text-center text-gray-700 dark:text-slate-300"></div>
+        <div id="messageArea" class="mb-6 text-sm text-center text-gray-700"></div>
 
         <div id="resultsContainer" class="overflow-x-auto">
-            <h2 class="text-2xl font-semibold text-gray-700 dark:text-slate-100 mb-4">Pontos Gerados:</h2>
-            <table id="resultsTable" class="min-w-full divide-y divide-gray-200 dark:divide-slate-700 shadow-md hidden">
-                <thead class="bg-gray-50 dark:bg-slate-700">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Pontos Gerados:</h2>
+            <table id="resultsTable" class="min-w-full divide-y divide-gray-200 shadow-md hidden">
+                <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">#</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Coordenadas</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-slate-400 uppercase tracking-wider">Endereço Detalhado</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coordenadas</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Endereço Detalhado</th>
                     </tr>
                 </thead>
-                <tbody id="resultsBody" class="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-slate-700">
+                <tbody id="resultsBody" class="bg-white divide-y divide-gray-200">
                 </tbody>
             </table>
-            <p id="noResults" class="text-gray-500 dark:text-slate-400 text-center py-4">Nenhum dado gerado ainda. Preencha os campos e clique em "Gerar Mapa".</p>
+            <p id="noResults" class="text-gray-500 text-center py-4">Nenhum dado gerado ainda. Preencha os campos e clique em "Gerar Mapa".</p>
         </div>
 
         <div id="copyButtonsContainer" class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-6" style="display: none;">
@@ -1096,12 +1010,14 @@
                 Exportar para Bloco de Notas
             </button>
         </div>
+
+        </div>
     </div>
 
     <div id="customModal" class="modal">
-        <div class="modal-content dark:bg-slate-800">
-            <span class="modal-close dark:text-slate-400 dark:hover:text-slate-200" onclick="closeModal()">&times;</span>
-            <p id="modalMessageText" class="text-gray-700 dark:text-slate-100 text-lg mb-6"></p>
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <p id="modalMessageText" class="text-gray-700 text-lg mb-6"></p>
             <button onclick="closeModal()" class="btn btn-modal">OK</button>
         </div>
     </div>
@@ -1162,7 +1078,6 @@
         const loginError = document.getElementById('loginError');
         const welcomeUser = document.getElementById('welcomeUser');
         const logoutButton = document.getElementById('logoutButton');
-        const themeSwitcher = document.getElementById('themeSwitcher');
 
         // Variáveis da aplicação de mapeamento
         let map;
@@ -1307,35 +1222,6 @@
             alert('Mensagem enviada com sucesso! Retornaremos em breve.');
             this.reset();
         });
-
-        // Sistema de temas
-        function applyTheme(theme) {
-            const htmlElement = document.documentElement;
-            htmlElement.classList.remove('dark');
-            if (theme === 'dark') htmlElement.classList.add('dark');
-            localStorage.setItem('theme', theme);
-            themeSwitcher.value = theme;
-        }
-
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        const themeSelectorContainer = document.getElementById('themeSelectorContainer');
-        let themeSelectorVisible = false;
-
-        themeToggleBtn.addEventListener('click', () => {
-            themeSelectorVisible = !themeSelectorVisible;
-            themeSelectorContainer.style.display = themeSelectorVisible ? 'block' : 'none';
-            localStorage.setItem('themeSelectorVisible', themeSelectorVisible);
-        });
-
-        const savedVisibility = localStorage.getItem('themeSelectorVisible');
-        if (savedVisibility === 'true') {
-            themeSelectorVisible = true;
-            themeSelectorContainer.style.display = 'block';
-        }
-
-        themeSwitcher.addEventListener('change', (event) => applyTheme(event.target.value));
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
 
         // Funções da aplicação de mapeamento
         function initializeMap() {
@@ -1487,20 +1373,53 @@
                 // Agora gerar pontos adicionais baseado na quantidade selecionada
                 const pointsToGenerate = selectedQuantity - 1; // -1 porque já temos a coordenada central
                 const uniquePoints = new Set();
+                const uniqueStreets = new Set(); // Set para controlar ruas únicas
+                
                 uniquePoints.add(`${lat.toFixed(5)},${lon.toFixed(5)}`); // Adicionar coordenada central ao set
+                
+                // Adicionar a rua central ao set de ruas únicas
+                if (collectedData.length > 0 && collectedData[0].addressInfo.address) {
+                    const centralStreet = collectedData[0].addressInfo.address.road || 
+                                        collectedData[0].addressInfo.address.pedestrian || 
+                                        collectedData[0].addressInfo.address.footway || 
+                                        collectedData[0].addressInfo.address.street || "";
+                    if (centralStreet) {
+                        uniqueStreets.add(centralStreet.toLowerCase().trim());
+                    }
+                }
+                
                 let attempts = 0;
-                const maxAttempts = pointsToGenerate * 15; // Reduzir tentativas máximas
-                const delayBetweenRequests = 800; // Reduzir delay entre requests
+                const maxAttempts = pointsToGenerate * 25; // Aumentar tentativas para encontrar ruas únicas
+                const delayBetweenRequests = 800;
 
                 for (let i = 0; i < pointsToGenerate && attempts < maxAttempts; attempts++) {
                     const randomPoint = getRandomPointInRadius(lat, lon, selectedRadiusKm);
-                    const pointKey = `${randomPoint.lat.toFixed(4)},${randomPoint.lng.toFixed(4)}`; // Reduzir precisão para mais variedade
+                    const pointKey = `${randomPoint.lat.toFixed(4)},${randomPoint.lng.toFixed(4)}`;
 
                     if (!uniquePoints.has(pointKey)) {
                         uniquePoints.add(pointKey);
                         try {
                             await new Promise(resolve => setTimeout(resolve, delayBetweenRequests));
                             const addressDetails = await reverseGeocode(randomPoint.lat, randomPoint.lng, "CoordeMaps/1.0 (contato@coordemaps.com)"); 
+
+                            // Extrair nome da rua para verificação
+                            const streetName = addressDetails.address.road || 
+                                             addressDetails.address.pedestrian || 
+                                             addressDetails.address.footway || 
+                                             addressDetails.address.street || "";
+                            
+                            const streetKey = streetName.toLowerCase().trim();
+                            
+                            // Verificar se a rua já existe (apenas se tiver nome de rua válido)
+                            if (streetName && uniqueStreets.has(streetKey)) {
+                                console.log(`Rua duplicada encontrada: ${streetName}. Tentando novamente...`);
+                                continue; // Pular este ponto e tentar outro
+                            }
+                            
+                            // Adicionar rua ao set de ruas únicas se tiver nome válido
+                            if (streetName) {
+                                uniqueStreets.add(streetKey);
+                            }
 
                             collectedData.push({
                                 id: collectedData.length + 1, latitude: randomPoint.lat,
@@ -1510,7 +1429,7 @@
                             i++; 
                         } catch (error) {
                             console.warn(`Geocodificação falhou para ${randomPoint.lat.toFixed(5)}, ${randomPoint.lng.toFixed(5)}: ${error.message}`);
-                            // Mesmo com erro, adicionar o ponto com informações básicas
+                            // Mesmo com erro, adicionar o ponto com informações básicas (coordenadas sempre são únicas)
                             collectedData.push({
                                 id: collectedData.length + 1, latitude: randomPoint.lat,
                                 longitude: randomPoint.lng, 
@@ -1538,6 +1457,9 @@
                     copyButtonsContainer.style.display = 'grid'; 
                     noResultsText.style.display = 'none'; 
                     resultsTable.classList.remove('hidden');
+                    
+                    
+                    
                     if (collectedData.length < selectedQuantity) {
                         showMessage(`Geradas ${collectedData.length} de ${selectedQuantity} coordenadas. Algumas coordenadas podem não ter ruas identificáveis na região.`, false);
                     } else {
@@ -1548,6 +1470,7 @@
                     resultsTable.classList.add('hidden');
                     noResultsText.style.display = 'block';
                     copyButtonsContainer.style.display = 'none';
+                    
                 }
             });
 
@@ -1560,7 +1483,7 @@
                 copyToClipboard(coordsText, "Coordenadas copiadas com sucesso!", "Falha ao copiar coordenadas.");
             });
 
-            
+
             copyAddressesButton.addEventListener('click', () => {
                 if (collectedData.length === 0) {
                     showModal("Nenhum endereço para copiar.");
@@ -1573,7 +1496,7 @@
                     const ad = data.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
-                    
+
                     let displayAddress = "";
                     if (streetName && location) {
                         displayAddress = `${streetName} - ${location}`;
@@ -1602,7 +1525,7 @@
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
-                    
+
                     let excelAddress = "";
                     if (streetName && location) {
                         excelAddress = `${streetName} - ${location}`;
@@ -1613,7 +1536,7 @@
                     } else {
                         excelAddress = item.addressInfo.display_name || "Não disponível";
                     }
-                    
+
                     return {
                         'ID': item.id, 'Latitude': item.latitude.toFixed(6), 'Longitude': item.longitude.toFixed(6),
                         'Endereço Completo': excelAddress
@@ -1647,7 +1570,7 @@
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
-                    
+
                     let streetAddress = "";
                     if (streetName && location) {
                         streetAddress = `${streetName} - ${location}`;
@@ -1857,10 +1780,6 @@
                 if (data.isCentral) {
                     row.style.backgroundColor = '#fef3c7';
                     row.style.fontWeight = '600';
-                    if (document.documentElement.classList.contains('dark')) {
-                        row.style.backgroundColor = '#365314';
-                        row.style.color = '#fde047';
-                    }
                 }
 
                 const idCell = row.insertCell();
@@ -1871,7 +1790,7 @@
                 const ad = data.addressInfo.address;
                 let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                 let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
-                
+
                 let displayAddress = "";
                 if (streetName && location) {
                     displayAddress = `${streetName} - ${location}`;
@@ -2027,8 +1946,10 @@
         function showMessage(text, isError = true) {
             const messageArea = document.getElementById('messageArea');
             messageArea.textContent = text;
-            messageArea.className = `mb-6 text-sm text-center ${isError ? 'text-red-500 dark:text-red-300' : 'text-green-600 dark:text-green-300'}`;
+            messageArea.className = `mb-6 text-sm text-center ${isError ? 'text-red-500' : 'text-green-600'}`;
         }
+
+        
 
         // Inicializar com navegação
         showNavigationView();
