@@ -1,0 +1,886 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rota Carro de Som - Propaganda</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .header h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .control-group label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, button:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            font-weight: bold;
+            min-width: 120px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .status.active {
+            color: #27ae60;
+        }
+
+        .status.error {
+            color: #e74c3c;
+        }
+
+        #map {
+            flex: 1;
+            min-height: 0;
+        }
+
+        .route-info {
+            position: absolute;
+            top: 120px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            min-width: 200px;
+        }
+
+        .route-info h3 {
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .route-info p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .route-info .highlight {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .send-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .send-btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .send-btn.sms {
+            background: #007AFF;
+            color: white;
+        }
+
+        .send-btn.copy {
+            background: #FF9500;
+            color: white;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .route-preview {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+
+        .route-preview h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .route-preview pre {
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #666;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .route-info {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 10px;
+                order: -1;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10px;
+            }
+
+            .send-options {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚗 Rota Carro de Som - Propaganda</h1>
+            <div class="controls">
+                <div class="control-group">
+                    <label>Tempo de Percurso</label>
+                    <select id="timeSelect">
+                        <option value="2">2 horas</option>
+                        <option value="3">3 horas</option>
+                        <option value="4" selected>4 horas</option>
+                        <option value="5">5 horas</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Velocidade Média</label>
+                    <select id="speedSelect">
+                        <option value="15">15 km/h</option>
+                        <option value="17" selected>17 km/h</option>
+                        <option value="20">20 km/h</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Localização</label>
+                    <button id="getCurrentLocation">📍 Usar Minha Localização</button>
+                </div>
+                <div class="control-group">
+                    <label>Coordenadas</label>
+                    <button id="setManualCoords">📝 Definir Coordenadas</button>
+                </div>
+                <div class="control-group">
+                    <label>Rota</label>
+                    <button id="generateRoute" disabled>🗺️ Gerar Rota</button>
+                </div>
+                <div class="control-group">
+                    <label>Enviar Rota</label>
+                    <button id="sendRoute" disabled>📱 Enviar para Motorista</button>
+                </div>
+                <div class="control-group">
+                    <label>Navegação</label>
+                    <button id="clearRoute">🗑️ Limpar Rota</button>
+                </div>
+            </div>
+            <div class="status" id="status">Use sua localização atual ou defina coordenadas manualmente para começar</div>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="route-info" id="routeInfo" style="display: none;">
+            <h3>📊 Informações da Rota</h3>
+            <p>Tempo de Percurso: <span class="highlight" id="routeTime">-</span></p>
+            <p>Velocidade Média: <span class="highlight" id="routeSpeed">-</span></p>
+            <p>Distância Total: <span class="highlight" id="routeDistance">-</span></p>
+            <p>Pontos da Rota: <span class="highlight" id="routePoints">-</span></p>
+            <p>Status: <span class="highlight" id="routeStatus">Aguardando</span></p>
+        </div>
+
+        <!-- Modal para coordenadas manuais -->
+        <div class="modal" id="coordsModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📍 Definir Coordenadas Manualmente</h3>
+                    <button class="close-btn" id="closeCoordsModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="manualLat">Latitude:</label>
+                        <input type="number" id="manualLat" placeholder="-23.550520" step="any" />
+                    </div>
+                    <div class="input-group">
+                        <label for="manualLng">Longitude:</label>
+                        <input type="number" id="manualLng" placeholder="-46.633308" step="any" />
+                    </div>
+                    <div class="input-group">
+                        <label for="locationName">Nome do Local (opcional):</label>
+                        <input type="text" id="locationName" placeholder="Ex: Centro da cidade" />
+                    </div>
+                    <button id="setCoordinates" class="send-btn copy" style="width: 100%; margin-top: 15px;">
+                        📍 Definir Como Ponto de Partida
+                    </button>
+                    <div style="margin-top: 15px; padding: 10px; background: #f8f9fa; border-radius: 8px; font-size: 12px; color: #666;">
+                        <strong>Dica:</strong> Você pode obter coordenadas no Google Maps clicando em um local e copiando os números que aparecem.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para envio da rota -->
+        <div class="modal" id="sendModal" style="display: none;"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📱 Enviar Rota para Motorista</h3>
+                    <button class="close-btn" id="closeModal">×</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label for="driverPhone">Telefone do Motorista:</label>
+                        <input type="tel" id="driverPhone" placeholder="(21) 99999-9999" />
+                    </div>
+                    <div class="input-group">
+                        <label for="driverName">Nome do Motorista:</label>
+                        <input type="text" id="driverName" placeholder="Nome do motorista" />
+                    </div>
+                    <div class="send-options">
+                        <button id="sendWhatsApp" class="send-btn whatsapp">
+                            📱 Enviar via WhatsApp
+                        </button>
+                        <button id="sendSMS" class="send-btn sms">
+                            💬 Enviar via SMS
+                        </button>
+                        <button id="copyRoute" class="send-btn copy">
+                            📋 Copiar Rota
+                        </button>
+                    </div>
+                    <div class="route-preview">
+                        <h4>Prévia da Rota:</h4>
+                        <div id="routePreview"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        class CarroSomRoute {
+            constructor() {
+                this.map = null;
+                this.startMarker = null;
+                this.routeLayer = null;
+                this.currentLocation = null;
+                this.userMarker = null;
+                this.watchId = null;
+                this.generatedRoute = [];
+                
+                this.initMap();
+                this.bindEvents();
+            }
+
+            initMap() {
+                // Inicializar mapa centrado no Brasil
+                this.map = L.map('map').setView([-14.235, -51.925], 4);
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(this.map);
+
+                // Click no mapa para definir ponto de partida
+                this.map.on('click', (e) => {
+                    this.setStartPoint(e.latlng);
+                });
+            }
+
+            bindEvents() {
+                document.getElementById('getCurrentLocation').addEventListener('click', () => {
+                    this.getCurrentLocation();
+                });
+
+                document.getElementById('setManualCoords').addEventListener('click', () => {
+                    this.openCoordsModal();
+                });
+
+                document.getElementById('generateRoute').addEventListener('click', () => {
+                    this.generateRoute();
+                });
+
+                document.getElementById('clearRoute').addEventListener('click', () => {
+                    this.clearRoute();
+                });
+
+                document.getElementById('sendRoute').addEventListener('click', () => {
+                    this.openSendModal();
+                });
+
+                document.getElementById('closeModal').addEventListener('click', () => {
+                    this.closeSendModal();
+                });
+
+                document.getElementById('closeCoordsModal').addEventListener('click', () => {
+                    this.closeCoordsModal();
+                });
+
+                document.getElementById('setCoordinates').addEventListener('click', () => {
+                    this.setManualCoordinates();
+                });
+
+                document.getElementById('sendWhatsApp').addEventListener('click', () => {
+                    this.sendViaWhatsApp();
+                });
+
+                document.getElementById('sendSMS').addEventListener('click', () => {
+                    this.sendViaSMS();
+                });
+
+                document.getElementById('copyRoute').addEventListener('click', () => {
+                    this.copyRouteToClipboard();
+                });
+            }
+
+            setStatus(message, type = '') {
+                const statusEl = document.getElementById('status');
+                statusEl.textContent = message;
+                statusEl.className = `status ${type}`;
+            }
+
+            openCoordsModal() {
+                document.getElementById('coordsModal').style.display = 'flex';
+            }
+
+            closeCoordsModal() {
+                document.getElementById('coordsModal').style.display = 'none';
+            }
+
+            setManualCoordinates() {
+                const lat = parseFloat(document.getElementById('manualLat').value);
+                const lng = parseFloat(document.getElementById('manualLng').value);
+                const locationName = document.getElementById('locationName').value;
+
+                if (isNaN(lat) || isNaN(lng)) {
+                    alert('Por favor, insira coordenadas válidas');
+                    return;
+                }
+
+                if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                    alert('Coordenadas fora do intervalo válido');
+                    return;
+                }
+
+                const latlng = L.latLng(lat, lng);
+                this.setStartPoint(latlng, locationName);
+                this.closeCoordsModal();
+                
+                // Limpar campos
+                document.getElementById('manualLat').value = '';
+                document.getElementById('manualLng').value = '';
+                document.getElementById('locationName').value = '';
+            }
+
+            getCurrentLocation() {
+                if (!navigator.geolocation) {
+                    this.setStatus('Geolocalização não suportada neste navegador', 'error');
+                    return;
+                }
+
+                this.setStatus('Obtendo localização...', 'active');
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        this.setStartPoint(L.latLng(lat, lng));
+                        this.startLocationTracking();
+                    },
+                    (error) => {
+                        this.setStatus('Erro ao obter localização: ' + error.message, 'error');
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 0
+                    }
+                );
+            }
+
+            startLocationTracking() {
+                if (this.watchId) {
+                    navigator.geolocation.clearWatch(this.watchId);
+                }
+
+                this.watchId = navigator.geolocation.watchPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        this.updateUserPosition(L.latLng(lat, lng));
+                    },
+                    (error) => {
+                        console.error('Erro no tracking:', error);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 5000,
+                        maximumAge: 1000
+                    }
+                );
+            }
+
+            updateUserPosition(latlng) {
+                if (this.userMarker) {
+                    this.userMarker.setLatLng(latlng);
+                } else {
+                    this.userMarker = L.marker(latlng, {
+                        icon: L.divIcon({
+                            className: 'user-marker',
+                            html: '<div style="background: #e74c3c; width: 15px; height: 15px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>',
+                            iconSize: [21, 21],
+                            iconAnchor: [10, 10]
+                        })
+                    }).addTo(this.map);
+                }
+                
+                this.currentLocation = latlng;
+            }
+
+            setStartPoint(latlng, locationName = '') {
+                // Remover marcador anterior
+                if (this.startMarker) {
+                    this.map.removeLayer(this.startMarker);
+                }
+
+                // Adicionar novo marcador
+                this.startMarker = L.marker(latlng, {
+                    icon: L.divIcon({
+                        className: 'start-marker',
+                        html: '<div style="background: #27ae60; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);">🏁</div>',
+                        iconSize: [36, 36],
+                        iconAnchor: [18, 18]
+                    })
+                }).addTo(this.map);
+
+                // Adicionar popup com informações
+                const popupContent = locationName ? 
+                    `<strong>Ponto de Partida</strong><br>${locationName}<br>Lat: ${latlng.lat.toFixed(6)}<br>Lng: ${latlng.lng.toFixed(6)}` :
+                    `<strong>Ponto de Partida</strong><br>Lat: ${latlng.lat.toFixed(6)}<br>Lng: ${latlng.lng.toFixed(6)}`;
+                
+                this.startMarker.bindPopup(popupContent);
+
+                this.map.setView(latlng, 15);
+                
+                // Habilitar botão de gerar rota
+                document.getElementById('generateRoute').disabled = false;
+                const statusMessage = locationName ? 
+                    `Ponto de partida definido em ${locationName}! Agora gere a rota.` :
+                    'Ponto de partida definido! Agora gere a rota.';
+                this.setStatus(statusMessage, 'active');
+            }
+
+            generateRoute() {
+                if (!this.startMarker) {
+                    this.setStatus('Defina um ponto de partida primeiro', 'error');
+                    return;
+                }
+
+                const timeHours = parseFloat(document.getElementById('timeSelect').value);
+                const speed = parseFloat(document.getElementById('speedSelect').value);
+                const distance = timeHours * speed; // Distância = Tempo × Velocidade
+                const startPoint = this.startMarker.getLatLng();
+                
+                this.setStatus('Gerando rota...', 'active');
+                
+                // Gerar pontos da rota em formato circular
+                const route = this.generateCircularRoute(startPoint, distance);
+                this.displayRoute(route, distance, timeHours, speed);
+                
+                this.setStatus('Rota gerada! Siga os pontos no mapa.', 'active');
+            }
+
+            generateCircularRoute(center, radiusKm) {
+                const points = [];
+                const numPoints = 20; // Número de pontos na rota
+                
+                // Converter km para graus (aproximado)
+                const radiusLat = radiusKm / 111; // 1 grau lat ≈ 111 km
+                const radiusLng = radiusKm / (111 * Math.cos(center.lat * Math.PI / 180));
+                
+                for (let i = 0; i <= numPoints; i++) {
+                    const angle = (i / numPoints) * 2 * Math.PI;
+                    const lat = center.lat + radiusLat * Math.cos(angle);
+                    const lng = center.lng + radiusLng * Math.sin(angle);
+                    points.push([lat, lng]);
+                }
+                
+                this.generatedRoute = points;
+                return points;
+            }
+
+            displayRoute(points, distance, timeHours, speed) {
+                // Remover rota anterior
+                if (this.routeLayer) {
+                    this.map.removeLayer(this.routeLayer);
+                }
+
+                // Criar nova rota
+                this.routeLayer = L.polyline(points, {
+                    color: '#3498db',
+                    weight: 5,
+                    opacity: 0.8,
+                    dashArray: '10, 5'
+                }).addTo(this.map);
+
+                // Adicionar marcadores nos pontos principais
+                const keyPoints = [0, 5, 10, 15, 20]; // Pontos principais
+                keyPoints.forEach((i, index) => {
+                    if (points[i]) {
+                        L.marker(points[i], {
+                            icon: L.divIcon({
+                                className: 'route-marker',
+                                html: `<div style="background: #3498db; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; border: 2px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);">${index + 1}</div>`,
+                                iconSize: [29, 29],
+                                iconAnchor: [14, 14]
+                            })
+                        }).addTo(this.map);
+                    }
+                });
+
+                // Ajustar zoom para mostrar toda a rota
+                this.map.fitBounds(this.routeLayer.getBounds(), { padding: [20, 20] });
+
+                // Atualizar informações da rota
+                this.updateRouteInfo(distance, timeHours, speed, points.length);
+            }
+
+            updateRouteInfo(distance, timeHours, speed, pointCount) {
+                document.getElementById('routeTime').textContent = `${timeHours} horas`;
+                document.getElementById('routeSpeed').textContent = `${speed} km/h`;
+                document.getElementById('routeDistance').textContent = `${distance.toFixed(1)} km`;
+                document.getElementById('routePoints').textContent = pointCount;
+                document.getElementById('routeStatus').textContent = 'Ativa';
+                document.getElementById('routeInfo').style.display = 'block';
+                
+                // Habilitar botão de enviar rota
+                document.getElementById('sendRoute').disabled = false;
+            }
+
+            openSendModal() {
+                if (!this.generatedRoute.length) {
+                    this.setStatus('Gere uma rota primeiro antes de enviar', 'error');
+                    return;
+                }
+
+                // Mostrar prévia da rota
+                const routeText = this.generateRouteText();
+                document.getElementById('routePreview').innerHTML = `<pre>${routeText}</pre>`;
+                
+                document.getElementById('sendModal').style.display = 'flex';
+            }
+
+            closeSendModal() {
+                document.getElementById('sendModal').style.display = 'none';
+            }
+
+            generateRouteText() {
+                const timeHours = document.getElementById('timeSelect').value;
+                const speed = document.getElementById('speedSelect').value;
+                const distance = (timeHours * speed).toFixed(1);
+                const startPoint = this.startMarker ? this.startMarker.getLatLng() : null;
+                
+                if (!startPoint) return '';
+
+                return `🚗 ROTA CARRO DE SOM - PROPAGANDA
+
+📍 PONTO DE PARTIDA:
+${startPoint.lat.toFixed(6)}, ${startPoint.lng.toFixed(6)}
+
+⏱️ TEMPO DE PERCURSO: ${timeHours} horas
+🚗 VELOCIDADE MÉDIA: ${speed} km/h
+📏 DISTÂNCIA TOTAL: ${distance} km
+
+🗺️ INSTRUÇÕES:
+1. Inicie no ponto de partida marcado
+2. Siga a rota circular durante ${timeHours} horas
+3. Mantenha velocidade constante de ${speed} km/h
+4. Mantenha o som ligado durante todo percurso
+5. Retorne ao ponto de partida ao final
+
+📱 Para navegação GPS:
+${startPoint.lat.toFixed(6)}, ${startPoint.lng.toFixed(6)}
+
+⚠️ IMPORTANTE:
+- Respeite as leis de trânsito
+- Velocidade adequada para carro de som
+- Evite horários de pico se possível
+- Mantenha volume conforme legislação local
+- Faça pausas se necessário
+
+Boa propaganda! 🎵`;
+            }
+
+            sendViaWhatsApp() {
+                const phone = document.getElementById('driverPhone').value.replace(/\D/g, '');
+                const name = document.getElementById('driverName').value || 'Motorista';
+                
+                if (!phone) {
+                    alert('Por favor, insira o telefone do motorista');
+                    return;
+                }
+
+                const routeText = this.generateRouteText();
+                const message = `Olá ${name}! Aqui está sua rota para o carro de som:\n\n${routeText}`;
+                
+                const whatsappUrl = `https://wa.me/55${phone}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+                
+                this.setStatus('Rota enviada via WhatsApp!', 'active');
+                this.closeSendModal();
+            }
+
+            sendViaSMS() {
+                const phone = document.getElementById('driverPhone').value.replace(/\D/g, '');
+                const name = document.getElementById('driverName').value || 'Motorista';
+                
+                if (!phone) {
+                    alert('Por favor, insira o telefone do motorista');
+                    return;
+                }
+
+                const routeText = this.generateRouteText();
+                const message = `${name}, sua rota: ${routeText}`;
+                
+                const smsUrl = `sms:+55${phone}?body=${encodeURIComponent(message)}`;
+                window.open(smsUrl, '_blank');
+                
+                this.setStatus('SMS preparado para envio!', 'active');
+                this.closeSendModal();
+            }
+
+            copyRouteToClipboard() {
+                const routeText = this.generateRouteText();
+                
+                navigator.clipboard.writeText(routeText).then(() => {
+                    this.setStatus('Rota copiada para área de transferência!', 'active');
+                    this.closeSendModal();
+                }).catch(() => {
+                    // Fallback para navegadores mais antigos
+                    const textArea = document.createElement('textarea');
+                    textArea.value = routeText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    this.setStatus('Rota copiada para área de transferência!', 'active');
+                    this.closeSendModal();
+                });
+            }
+
+            clearRoute() {
+                // Limpar rota
+                if (this.routeLayer) {
+                    this.map.removeLayer(this.routeLayer);
+                    this.routeLayer = null;
+                }
+
+                // Limpar marcador de início
+                if (this.startMarker) {
+                    this.map.removeLayer(this.startMarker);
+                    this.startMarker = null;
+                }
+
+                // Parar tracking
+                if (this.watchId) {
+                    navigator.geolocation.clearWatch(this.watchId);
+                    this.watchId = null;
+                }
+
+                // Limpar marcador do usuário
+                if (this.userMarker) {
+                    this.map.removeLayer(this.userMarker);
+                    this.userMarker = null;
+                }
+
+                // Resetar interface
+                document.getElementById('generateRoute').disabled = true;
+                document.getElementById('sendRoute').disabled = true;
+                document.getElementById('routeInfo').style.display = 'none';
+                this.setStatus('Rota limpa. Defina um novo ponto de partida.', '');
+                
+                this.generatedRoute = [];
+                this.currentLocation = null;
+            }
+        }
+
+        // Inicializar app quando a página carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            new CarroSomRoute();
+        });
+    </script>
+</body>
+</html>

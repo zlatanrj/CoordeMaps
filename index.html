@@ -22,7 +22,7 @@
             transition: all 0.3s ease;
         }
 
-        
+
 
         .navbar-glass {
             background: rgba(255, 255, 255, 0.1);
@@ -71,7 +71,7 @@
             transform: scale(1.1);
         }
 
-        
+
 
         /* Estilos para o vídeo de demonstração */
         .demo-container {
@@ -351,7 +351,7 @@
             border: 1px solid #f87171;
         }
 
-        
+
 
         #map {
             height: 500px; width: 100%; border-radius: 20px; margin-bottom: 2rem;
@@ -493,14 +493,24 @@
     <nav id="mainNavigation" class="navbar-glass fixed top-0 left-0 right-0 z-50 p-4" style="display: none;">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl px-3 py-2 flex items-center space-x-2">
-                    <div class="bg-white/20 rounded-md p-1">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
-                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
-                        </svg>
+                <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-2xl px-4 py-2 flex items-center space-x-3 border border-white/20">
+                    <div class="relative">
+                        <div class="bg-white/25 backdrop-blur-sm rounded-xl p-2">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="navIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="url(#navIconGradient)"/>
+                                <circle cx="12" cy="9" r="2" fill="#6366f1" stroke="white" stroke-width="0.8"/>
+                                <circle cx="12" cy="9" r="0.8" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border border-white"></div>
                     </div>
-                    <h1 class="text-xl font-bold text-white">CoordeMaps</h1>
+                    <h1 class="text-xl font-bold text-white tracking-tight">CoordeMaps</h1>
                 </div>
             </div>
 
@@ -552,25 +562,46 @@
         <section id="inicio" class="content-section active">
             <div class="container mx-auto max-w-4xl">
                 <div class="card-glass rounded-3xl p-8 md:p-12 shadow-2xl text-center">
-                    <div class="mb-8">
-                        <div class="flex items-center justify-center mb-6">
-                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl px-6 py-3 flex items-center space-x-3 shadow-2xl">
-                                <div class="bg-white/20 rounded-lg p-2">
-                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
-                                        <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
-                                    </svg>
+                    <div class="mb-12">
+                        <!-- Logo e Título -->
+                        <div class="flex items-center justify-center mb-8">
+                            <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-3xl px-8 py-4 flex items-center space-x-4 shadow-2xl border border-white/20">
+                                <div class="relative">
+                                    <div class="bg-white/25 backdrop-blur-sm rounded-2xl p-3 shadow-inner">
+                                        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <defs>
+                                                <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                                    <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+                                                </linearGradient>
+                                            </defs>
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="url(#iconGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+                                            <circle cx="12" cy="9" r="2.5" fill="#6366f1" stroke="white" stroke-width="1"/>
+                                            <circle cx="12" cy="9" r="1" fill="white" opacity="0.9"/>
+                                            <circle cx="8" cy="6" r="1" fill="rgba(255,255,255,0.3)" opacity="0.6"/>
+                                            <circle cx="16" cy="8" r="0.8" fill="rgba(255,255,255,0.25)" opacity="0.5"/>
+                                            <circle cx="10" cy="12" r="0.6" fill="rgba(255,255,255,0.2)" opacity="0.4"/>
+                                        </svg>
+                                    </div>
+                                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
                                 </div>
-                                <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight">CoordeMaps</h1>
+                                <div class="flex flex-col">
+                                    <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none">CoordeMaps</h1>
+                                    <span class="text-white/70 text-sm font-medium tracking-wider">SISTEMA AVANÇADO</span>
+                                </div>
                             </div>
                         </div>
-                        <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-                            Sistema avançado de coordenadas e mapeamento. Gerencie, visualize e analise dados geográficos com precisão e facilidade.
-                        </p>
+                        
+                        <!-- Descrição Principal -->
+                        <div class="text-center mb-10">
+                            <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+                                Sistema avançado de coordenadas e mapeamento. Gerencie, visualize e analise dados geográficos com precisão e facilidade.
+                            </p>
+                        </div>
 
                         <!-- Vídeo de Apresentação -->
-                        <div class="bg-white/70 backdrop-blur-lg rounded-2xl p-6 mb-8 max-w-4xl mx-auto">
-                            <h3 class="text-2xl font-semibold text-gray-800 mb-4 text-center">🎥 Veja como funciona</h3>
+                        <div class="bg-white/70 backdrop-blur-lg rounded-2xl p-6 mb-10 max-w-4xl mx-auto shadow-lg border border-white/30">
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">🎥 Veja como funciona</h3>
                             <div class="demo-container bg-gray-100 rounded-lg overflow-hidden shadow-lg">
                                 <div class="demo-header bg-gradient-to-r from-blue-500 to-purple-600 p-3 text-white text-sm font-medium flex items-center justify-between">
                                     <span>CoordeMaps - Demonstração</span>
@@ -646,41 +677,46 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-                        <div class="bg-white/50 p-6 rounded-xl">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
-                                </svg>
+                    <!-- Cards de Recursos -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20 hover:bg-white/60 transition-all duration-300">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-1.447-.894L15 4m0 13V4m0 0L9 7"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2 text-center">Mapeamento Preciso</h3>
+                                <p class="text-gray-600 text-sm text-center">Visualização detalhada de coordenadas com mapas interativos</p>
                             </div>
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Mapeamento Preciso</h3>
-                            <p class="text-gray-600 text-sm">Visualização detalhada de coordenadas com mapas interativos</p>
+
+                            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20 hover:bg-white/60 transition-all duration-300">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2 text-center">Análise de Dados</h3>
+                                <p class="text-gray-600 text-sm text-center">Ferramentas avançadas para análise geográfica e estatística</p>
+                            </div>
+
+                            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20 hover:bg-white/60 transition-all duration-300">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-lg font-semibold text-gray-800 mb-2 text-center">Segurança</h3>
+                                <p class="text-gray-600 text-sm text-center">Sistema seguro com autenticação e proteção de dados</p>
+                            </div>
                         </div>
 
-                        <div class="bg-white/50 p-6 rounded-xl">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Análise de Dados</h3>
-                            <p class="text-gray-600 text-sm">Ferramentas avançadas para análise geográfica e estatística</p>
-                        </div>
-
-                        <div class="bg-white/50 p-6 rounded-xl">
-                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-semibold text-gray-800 mb-2">Segurança</h3>
-                            <p class="text-gray-600 text-sm">Sistema seguro com autenticação e proteção de dados</p>
+                        <!-- Botão de Call to Action -->
+                        <div class="text-center">
+                            <button onclick="showSection('login')" class="btn-primary text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                                Começar Agora
+                            </button>
                         </div>
                     </div>
-
-                    <button onclick="showSection('login')" class="btn-primary text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg">
-                        Começar Agora
-                    </button>
                 </div>
             </div>
         </section>
@@ -880,21 +916,35 @@
 
 
 
-    
+
 
     <!-- Aplicação Principal (inicialmente oculta) -->
     <div id="mainContentContainer" class="container mx-auto max-w-6xl bg-white/90 backdrop-blur-xl dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-2xl border border-white/20" style="display: none;">
         <div class="flex justify-between items-center mb-8">
             <div class="flex items-center">
-                <div class="inline-block p-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 mr-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="bg-white/20 rounded-xl p-3">
-                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
-                                <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
+                <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-3xl px-8 py-4 flex items-center space-x-4 shadow-2xl border border-white/20">
+                    <div class="relative">
+                        <div class="bg-white/25 backdrop-blur-sm rounded-2xl p-3 shadow-inner">
+                            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="url(#iconGradient)" stroke="rgba(255,255,255,0.4)" stroke-width="0.5"/>
+                                <circle cx="12" cy="9" r="2.5" fill="#6366f1" stroke="white" stroke-width="1"/>
+                                <circle cx="12" cy="9" r="1" fill="white" opacity="0.9"/>
+                                <circle cx="8" cy="6" r="1" fill="rgba(255,255,255,0.3)" opacity="0.6"/>
+                                <circle cx="16" cy="8" r="0.8" fill="rgba(255,255,255,0.25)" opacity="0.5"/>
+                                <circle cx="10" cy="12" r="0.6" fill="rgba(255,255,255,0.2)" opacity="0.4"/>
                             </svg>
                         </div>
-                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-0">CoordeMaps</h1>
+                        <div class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white shadow-lg animate-pulse"></div>
+                    </div>
+                    <div class="flex flex-col">
+                        <h1 class="text-3xl md:text-4xl font-bold text-white tracking-tight leading-none">CoordeMaps</h1>
+                        <span class="text-white/70 text-sm font-medium tracking-wider">SISTEMA AVANÇADO</span>
                     </div>
                 </div>
                 <span id="welcomeUser" class="text-lg font-medium text-gray-700"></span>
@@ -914,7 +964,7 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 mb-6">
             <div>
                 <label for="radiusSelect" class="block text-sm font-medium text-gray-700 mb-1.5">Raio de Busca:</label>
                 <select id="radiusSelect" name="radiusSelect" class="form-select w-full">
@@ -950,6 +1000,8 @@
             </div>
         </div>
 
+        
+
         <button id="generateMap" class="btn btn-primary w-full mb-8 text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 lucide lucide-map-pin">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
@@ -978,9 +1030,9 @@
             <table id="resultsTable" class="min-w-full divide-y divide-gray-200 shadow-md hidden">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coordenadas</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Endereço Detalhado</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Latitude</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Longitude</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rua</th>
                     </tr>
                 </thead>
                 <tbody id="resultsBody" class="bg-white divide-y divide-gray-200">
@@ -1026,14 +1078,24 @@
     <footer id="mainFooter" class="bg-black/20 backdrop-blur-lg text-white py-8">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-3 mb-4">
-                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg px-3 py-2 flex items-center space-x-2">
-                    <div class="bg-white/20 rounded-md p-1">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
-                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
-                        </svg>
+                <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-lg px-2 py-1 flex items-center space-x-2">
+                    <div class="relative">
+                        <div class="bg-white/25 backdrop-blur-sm rounded-sm p-1">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="navIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="url(#navIconGradient)"/>
+                                <circle cx="12" cy="9" r="2" fill="#6366f1" stroke="white" stroke-width="0.8"/>
+                                <circle cx="12" cy="9" r="0.8" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border border-white"></div>
                     </div>
-                    <span class="text-lg font-bold text-white">CoordeMaps</span>
+                    <span class="text-md font-bold text-white">CoordeMaps</span>
                 </div>
             </div>
             <p class="text-white/80">&copy; 2025 CoordeMaps. Todos os direitos reservados.</p>
@@ -1044,12 +1106,22 @@
     <footer id="mappingFooter" class="bg-black/20 backdrop-blur-lg text-white py-6 mt-8" style="display: none;">
         <div class="container mx-auto px-4 text-center">
             <div class="flex items-center justify-center space-x-3 mb-3">
-                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg px-2 py-1 flex items-center space-x-2">
-                    <div class="bg-white/20 rounded-sm p-1">
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="white"/>
-                            <circle cx="12" cy="9" r="1.5" fill="#4F46E5"/>
-                        </svg>
+                <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 rounded-lg px-2 py-1 flex items-center space-x-2">
+                    <div class="relative">
+                        <div class="bg-white/25 backdrop-blur-sm rounded-sm p-1">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="navIconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#e0e7ff;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="url(#navIconGradient)"/>
+                                <circle cx="12" cy="9" r="2" fill="#6366f1" stroke="white" stroke-width="0.8"/>
+                                <circle cx="12" cy="9" r="0.8" fill="white"/>
+                            </svg>
+                        </div>
+                        <div class="absolute -top-0.5 -right-0.5 w-2 h-2 bg-emerald-400 rounded-full border border-white"></div>
                     </div>
                     <span class="text-md font-bold text-white">CoordeMaps</span>
                 </div>
@@ -1374,9 +1446,9 @@
                 const pointsToGenerate = selectedQuantity - 1; // -1 porque já temos a coordenada central
                 const uniquePoints = new Set();
                 const uniqueStreets = new Set(); // Set para controlar ruas únicas
-                
+
                 uniquePoints.add(`${lat.toFixed(5)},${lon.toFixed(5)}`); // Adicionar coordenada central ao set
-                
+
                 // Adicionar a rua central ao set de ruas únicas
                 if (collectedData.length > 0 && collectedData[0].addressInfo.address) {
                     const centralStreet = collectedData[0].addressInfo.address.road || 
@@ -1387,7 +1459,7 @@
                         uniqueStreets.add(centralStreet.toLowerCase().trim());
                     }
                 }
-                
+
                 let attempts = 0;
                 const maxAttempts = pointsToGenerate * 25; // Aumentar tentativas para encontrar ruas únicas
                 const delayBetweenRequests = 800;
@@ -1407,15 +1479,15 @@
                                              addressDetails.address.pedestrian || 
                                              addressDetails.address.footway || 
                                              addressDetails.address.street || "";
-                            
+
                             const streetKey = streetName.toLowerCase().trim();
-                            
+
                             // Verificar se a rua já existe (apenas se tiver nome de rua válido)
                             if (streetName && uniqueStreets.has(streetKey)) {
                                 console.log(`Rua duplicada encontrada: ${streetName}. Tentando novamente...`);
                                 continue; // Pular este ponto e tentar outro
                             }
-                            
+
                             // Adicionar rua ao set de ruas únicas se tiver nome válido
                             if (streetName) {
                                 uniqueStreets.add(streetKey);
@@ -1457,9 +1529,9 @@
                     copyButtonsContainer.style.display = 'grid'; 
                     noResultsText.style.display = 'none'; 
                     resultsTable.classList.remove('hidden');
-                    
-                    
-                    
+
+
+
                     if (collectedData.length < selectedQuantity) {
                         showMessage(`Geradas ${collectedData.length} de ${selectedQuantity} coordenadas. Algumas coordenadas podem não ter ruas identificáveis na região.`, false);
                     } else {
@@ -1470,7 +1542,7 @@
                     resultsTable.classList.add('hidden');
                     noResultsText.style.display = 'block';
                     copyButtonsContainer.style.display = 'none';
-                    
+
                 }
             });
 
@@ -1490,28 +1562,22 @@
                     return;
                 }
 
-                let addressText = "=== ENDEREÇOS DETALHADOS ===\n\n";
-                // Usar todos os 10 endereços coletados para detalhamento
+                let addressText = "=== RELATÓRIO DE ENDEREÇOS ===\n\n";
+                addressText += "COORDENADAS E RUAS:\n";
+                addressText += "=" * 50 + "\n";
+
                 collectedData.forEach((data, index) => {
                     const ad = data.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
 
-                    let displayAddress = "";
-                    if (streetName && location) {
-                        displayAddress = `${streetName} - ${location}`;
-                    } else if (streetName) {
-                        displayAddress = streetName;
-                    } else if (location) {
-                        displayAddress = location;
-                    } else {
-                        displayAddress = "Endereço não disponível";
+                    if (!streetName) {
+                        streetName = data.isCentral ? "Coordenada Central" : "Rua não identificada";
                     }
 
-                    addressText += `[${index + 1}] ${displayAddress}\n`;
+                    addressText += `[${index + 1}] ${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)} - ${streetName}\n`;
                 });
 
-                copyToClipboard(addressText, "Endereços copiados com sucesso!", "Falha ao copiar endereços.");
+                copyToClipboard(addressText, "Relatório copiado com sucesso!", "Falha ao copiar relatório.");
             });
 
             const exportNotepadButton = document.getElementById('exportNotepad');
@@ -1521,33 +1587,34 @@
                     showModal("Não há dados para exportar.");
                     return;
                 }
+
                 const worksheetData = collectedData.map(item => {
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
 
-                    let excelAddress = "";
-                    if (streetName && location) {
-                        excelAddress = `${streetName} - ${location}`;
-                    } else if (streetName) {
-                        excelAddress = streetName;
-                    } else if (location) {
-                        excelAddress = location;
-                    } else {
-                        excelAddress = item.addressInfo.display_name || "Não disponível";
+                    if (!streetName) {
+                        streetName = item.isCentral ? "Coordenada Central" : "Rua não identificada";
                     }
 
                     return {
-                        'ID': item.id, 'Latitude': item.latitude.toFixed(6), 'Longitude': item.longitude.toFixed(6),
-                        'Endereço Completo': excelAddress
+                        'Latitude': item.latitude.toFixed(6),
+                        'Longitude': item.longitude.toFixed(6),
+                        'Rua': streetName
                     };
                 });
+
                 const worksheet = XLSX.utils.json_to_sheet(worksheetData);
                 const workbook = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(workbook, worksheet, "Coordenadas");
-                worksheet['!cols'] = [ { wch: 5 }, { wch: 15 }, { wch: 15 }, { wch: 80 } ]; 
-                XLSX.writeFile(workbook, "coordenadas_raio_detalhado.xlsx");
-                showModal("Dados exportados para 'coordenadas_raio_detalhado.xlsx' com sucesso!");
+                XLSX.utils.book_append_sheet(workbook, worksheet, "Relatório de Ruas");
+                worksheet['!cols'] = [ 
+                    { wch: 15 }, // Latitude
+                    { wch: 15 }, // Longitude  
+                    { wch: 40 }  // Rua
+                ]; 
+
+                const fileName = `RELATORIO_COORDENADAS_${new Date().getTime()}.xlsx`;
+                XLSX.writeFile(workbook, fileName);
+                showModal(`Dados exportados para '${fileName}' com sucesso!`);
             });
 
             exportNotepadButton.addEventListener('click', () => {
@@ -1556,45 +1623,35 @@
                     return;
                 }
 
-                let notepadContent = "=== COORDENADAS E ENDEREÇOS ===\n";
+                let notepadContent = "=== RELATÓRIO DE COORDENADAS ===\n";
                 notepadContent += `Gerado em: ${new Date().toLocaleString('pt-BR')}\n`;
                 notepadContent += `Total de pontos: ${collectedData.length}\n\n`;
 
-                // Primeiro todas as coordenadas
-                collectedData.forEach(item => {
-                    notepadContent += `${item.latitude.toFixed(6)}, ${item.longitude.toFixed(6)}\n`;
-                });
+                notepadContent += "LATITUDE\t\tLONGITUDE\t\tRUA\n";
+                notepadContent += "=" * 80 + "\n";
 
-                // Depois todas as ruas
                 collectedData.forEach(item => {
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                    let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
 
-                    let streetAddress = "";
-                    if (streetName && location) {
-                        streetAddress = `${streetName} - ${location}`;
-                    } else if (streetName) {
-                        streetAddress = streetName;
-                    } else if (location) {
-                        streetAddress = location;
-                    } else {
-                        streetAddress = "Endereço não disponível";
+                    if (!streetName) {
+                        streetName = item.isCentral ? "Coordenada Central" : "Rua não identificada";
                     }
 
-                    notepadContent += `${streetAddress}\n`;
+                    notepadContent += `${item.latitude.toFixed(6)}\t\t${item.longitude.toFixed(6)}\t\t${streetName}\n`;
                 });
 
                 // Criar e baixar arquivo .txt
                 const blob = new Blob([notepadContent], { type: 'text/plain;charset=utf-8' });
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = `coordenadas_${new Date().getTime()}.txt`;
+                const fileName = `RELATORIO_COORDENADAS_${new Date().getTime()}.txt`;
+                link.download = fileName;
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
-                showModal("Arquivo de texto exportado com sucesso!");
+                showModal(`Arquivo de texto '${fileName}' exportado com sucesso!`);
             });
 
             if (fullscreenMapBtn && mapContainerElement) {
@@ -1772,6 +1829,7 @@
         // Funções auxiliares para mapeamento
         function updateTable() {
             const resultsBody = document.getElementById('resultsBody');
+
             resultsBody.innerHTML = '';
             collectedData.forEach(data => {
                 const row = resultsBody.insertRow();
@@ -1782,31 +1840,19 @@
                     row.style.fontWeight = '600';
                 }
 
-                const idCell = row.insertCell();
-                idCell.textContent = data.isCentral ? `${data.id} ⭐` : data.id;
+                // Latitude
+                row.insertCell().textContent = data.latitude.toFixed(6);
 
-                row.insertCell().textContent = `${data.latitude.toFixed(6)},${data.longitude.toFixed(6)}`;
+                // Longitude
+                row.insertCell().textContent = data.longitude.toFixed(6);
 
+                // Rua
                 const ad = data.addressInfo.address;
                 let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-                let location = ad.suburb || ad.neighbourhood || ad.city || ad.town || ad.village || "";
-
-                let displayAddress = "";
-                if (streetName && location) {
-                    displayAddress = `${streetName} - ${location}`;
-                } else if (streetName) {
-                    displayAddress = streetName;
-                } else if (location) {
-                    displayAddress = location;
-                } else {
-                    displayAddress = data.addressInfo.display_name || "Endereço não disponível";
+                if (!streetName) {
+                    streetName = data.isCentral ? "Coordenada Central" : "Rua não identificada";
                 }
-
-                const addressCell = row.insertCell();
-                addressCell.textContent = displayAddress;
-                if (data.isCentral && !displayAddress) {
-                    addressCell.textContent = "Coordenada Central Pesquisada";
-                }
+                row.insertCell().textContent = streetName;
             });
         }
 
@@ -1949,7 +1995,7 @@
             messageArea.className = `mb-6 text-sm text-center ${isError ? 'text-red-500' : 'text-green-600'}`;
         }
 
-        
+
 
         // Inicializar com navegação
         showNavigationView();
