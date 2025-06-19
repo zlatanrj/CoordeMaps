@@ -591,7 +591,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Descrição Principal -->
                         <div class="text-center mb-10">
                             <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -1000,7 +1000,7 @@
             </div>
         </div>
 
-        
+
 
         <button id="generateMap" class="btn btn-primary w-full mb-8 text-lg">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2 lucide lucide-map-pin">
@@ -1030,9 +1030,8 @@
             <table id="resultsTable" class="min-w-full divide-y divide-gray-200 shadow-md hidden">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Latitude</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Longitude</th>
-                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rua</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Coordenadas</th>
+                        <th scope="col" class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Endereço Detalhado</th>
                     </tr>
                 </thead>
                 <tbody id="resultsBody" class="bg-white divide-y divide-gray-200">
@@ -1154,6 +1153,9 @@
         // Variáveis da aplicação de mapeamento
         let map;
         let radiusCircle;
+        let radiusControlMarkers = [];
+        let isDraggingRadius = false;
+        let centralCoordinate = null;
         let collectedData = [];
         const R_EARTH = 6371;
         const NUM_STREET_POINTS = 10;
@@ -1326,13 +1328,17 @@
             L.control.attribution({prefix: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> | &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors', position: 'bottomright'}).addTo(map);
 
             map.on('click', function(e) {
+                if (isDraggingRadius) return; // Não processar cliques durante o arrasto
+
                 const clickedLat = e.latlng.lat;
                 const clickedLng = e.latlng.lng;
                 const selectedRadiusKm = parseFloat(radiusSelect.value);
 
+                centralCoordinate = { lat: clickedLat, lng: clickedLng };
                 coordSearchInput.value = `${clickedLat.toFixed(6)}, ${clickedLng.toFixed(6)}`;
 
                 if (radiusCircle) map.removeLayer(radiusCircle);
+                clearRadiusControlMarkers();
 
                 if (!isNaN(selectedRadiusKm) && selectedRadiusKm > 0) {
                     radiusCircle = L.circle([clickedLat, clickedLng], {
@@ -1355,6 +1361,16 @@
                 showMessage("Novo centro definido no mapa. Clique em 'Gerar Mapa e Dados' para obter os pontos.", false);
             });
 
+            // Funções para controle manual do raio (removidas - sem marcadores visuais)
+            function clearRadiusControlMarkers() {
+                radiusControlMarkers.forEach(marker => {
+                    if (map.hasLayer(marker)) {
+                        map.removeLayer(marker);
+                    }
+                });
+                radiusControlMarkers = [];
+            }
+
             generateMapButton.addEventListener('click', async () => {
                 const selectedRadiusKm = parseFloat(radiusSelect.value);
                 const selectedQuantity = parseInt(quantitySelect.value);
@@ -1370,8 +1386,7 @@
                     return;
                 }
 
-                let processedCoordString = coordStringInput.trim(); 
-                if (!processedCoordString.includes(',')) {
+                let processedCoordString = coordStringInput.trim();                 if (!processedCoordString.includes(',')) {
                     const lastHyphenIdx = processedCoordString.lastIndexOf('-');
                     if (lastHyphenIdx > 0) { 
                         const potentialLat = processedCoordString.substring(0, lastHyphenIdx);
@@ -1409,21 +1424,16 @@
 
                 if (radiusCircle) map.removeLayer(radiusCircle);
 
-                let zoomLevel = 14;
-                if (selectedRadiusKm >= 4.5) zoomLevel = 11;
-                else if (selectedRadiusKm >= 3) zoomLevel = 12;
-                else if (selectedRadiusKm >= 1.5) zoomLevel = 13;
-                else zoomLevel = 14;
+                // Apenas centralizar no ponto, mantendo o zoom atual do usuário
+                map.setView([lat, lon], map.getZoom());
+                centralCoordinate = { lat: lat, lng: lon };
 
-                map.setView([lat, lon], zoomLevel);
-
+                clearRadiusControlMarkers();
+                
                 radiusCircle = L.circle([lat, lon], {
                     color: '#4f46e5', fillColor: '#6366f1', fillOpacity: 0.15,
                     radius: selectedRadiusKm * 1000, weight: 2 
                 }).addTo(map);
-                if (map.getZoom() > zoomLevel + 1 || map.getZoom() < zoomLevel -1) {
-                    map.fitBounds(radiusCircle.getBounds());
-                }
 
                 // Primeiro, adicionar a coordenada central pesquisada
                 try {
@@ -1449,14 +1459,26 @@
 
                 uniquePoints.add(`${lat.toFixed(5)},${lon.toFixed(5)}`); // Adicionar coordenada central ao set
 
-                // Adicionar a rua central ao set de ruas únicas
+                // Adicionar o endereço central ao set de endereços únicos
                 if (collectedData.length > 0 && collectedData[0].addressInfo.address) {
-                    const centralStreet = collectedData[0].addressInfo.address.road || 
-                                        collectedData[0].addressInfo.address.pedestrian || 
-                                        collectedData[0].addressInfo.address.footway || 
-                                        collectedData[0].addressInfo.address.street || "";
-                    if (centralStreet) {
-                        uniqueStreets.add(centralStreet.toLowerCase().trim());
+                    const centralAd = collectedData[0].addressInfo.address;
+                    const centralStreet = centralAd.road || centralAd.pedestrian || centralAd.footway || centralAd.street || "";
+                    const centralNeighborhood = centralAd.suburb || centralAd.neighbourhood || centralAd.quarter || centralAd.city_district || "";
+                    const centralCity = centralAd.city || centralAd.town || centralAd.village || centralAd.municipality || "";
+                    
+                    let centralFullAddress = centralStreet;
+                    const centralLocationSuffix = centralNeighborhood || centralCity || "";
+                    if (centralStreet && centralLocationSuffix) {
+                        centralFullAddress = `${centralStreet} - ${centralLocationSuffix}`;
+                    }
+                    
+                    if (centralFullAddress) {
+                        const normalizedCentralAddress = centralFullAddress.toLowerCase()
+                            .normalize('NFD')
+                            .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+                            .replace(/\s+/g, ' ') // Normaliza espaços
+                            .trim();
+                        uniqueStreets.add(normalizedCentralAddress);
                     }
                 }
 
@@ -1474,23 +1496,43 @@
                             await new Promise(resolve => setTimeout(resolve, delayBetweenRequests));
                             const addressDetails = await reverseGeocode(randomPoint.lat, randomPoint.lng, "CoordeMaps/1.0 (contato@coordemaps.com)"); 
 
-                            // Extrair nome da rua para verificação
+                            // Extrair nome da rua e bairro/cidade para verificação
                             const streetName = addressDetails.address.road || 
                                              addressDetails.address.pedestrian || 
                                              addressDetails.address.footway || 
                                              addressDetails.address.street || "";
+                            const neighborhood = addressDetails.address.suburb || 
+                                               addressDetails.address.neighbourhood || 
+                                               addressDetails.address.quarter || 
+                                               addressDetails.address.city_district || "";
+                            const city = addressDetails.address.city || 
+                                       addressDetails.address.town || 
+                                       addressDetails.address.village || 
+                                       addressDetails.address.municipality || "";
 
-                            const streetKey = streetName.toLowerCase().trim();
+                            // Criar endereço completo para verificação de duplicatas
+                            let fullAddressForCheck = streetName;
+                            const locationSuffix = neighborhood || city || "";
+                            if (streetName && locationSuffix) {
+                                fullAddressForCheck = `${streetName} - ${locationSuffix}`;
+                            }
 
-                            // Verificar se a rua já existe (apenas se tiver nome de rua válido)
-                            if (streetName && uniqueStreets.has(streetKey)) {
-                                console.log(`Rua duplicada encontrada: ${streetName}. Tentando novamente...`);
+                            // Normalizar o endereço completo para comparação (remover acentos, espaços extras, etc.)
+                            const normalizedFullAddress = fullAddressForCheck ? fullAddressForCheck.toLowerCase()
+                                .normalize('NFD')
+                                .replace(/[\u0300-\u036f]/g, '') // Remove acentos
+                                .replace(/\s+/g, ' ') // Normaliza espaços
+                                .trim() : "";
+
+                            // Verificar se o endereço já existe (apenas se tiver nome válido)
+                            if (normalizedFullAddress && uniqueStreets.has(normalizedFullAddress)) {
+                                console.log(`Endereço duplicado encontrado: ${fullAddressForCheck}. Tentando novamente...`);
                                 continue; // Pular este ponto e tentar outro
                             }
 
-                            // Adicionar rua ao set de ruas únicas se tiver nome válido
-                            if (streetName) {
-                                uniqueStreets.add(streetKey);
+                            // Adicionar endereço ao set de endereços únicos se tiver nome válido
+                            if (normalizedFullAddress) {
+                                uniqueStreets.add(normalizedFullAddress);
                             }
 
                             collectedData.push({
@@ -1569,12 +1611,23 @@
                 collectedData.forEach((data, index) => {
                     const ad = data.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-
+                    let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
+                    let city = ad.city || ad.town || ad.village || ad.municipality || "";
+                    
+                    let fullAddress = "";
                     if (!streetName) {
-                        streetName = data.isCentral ? "Coordenada Central" : "Rua não identificada";
+                        fullAddress = data.isCentral ? "Coordenada Central" : "Rua não identificada";
+                    } else {
+                        // Adicionar bairro ou cidade ao endereço
+                        let locationSuffix = neighborhood || city || "";
+                        if (locationSuffix) {
+                            fullAddress = `${streetName} - ${locationSuffix}`;
+                        } else {
+                            fullAddress = streetName;
+                        }
                     }
 
-                    addressText += `[${index + 1}] ${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)} - ${streetName}\n`;
+                    addressText += `[${index + 1}] ${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)} - ${fullAddress}\n`;
                 });
 
                 copyToClipboard(addressText, "Relatório copiado com sucesso!", "Falha ao copiar relatório.");
@@ -1591,15 +1644,26 @@
                 const worksheetData = collectedData.map(item => {
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-
+                    let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
+                    let city = ad.city || ad.town || ad.village || ad.municipality || "";
+                    
+                    let fullAddress = "";
                     if (!streetName) {
-                        streetName = item.isCentral ? "Coordenada Central" : "Rua não identificada";
+                        fullAddress = item.isCentral ? "Coordenada Central" : "Rua não identificada";
+                    } else {
+                        // Adicionar bairro ou cidade ao endereço
+                        let locationSuffix = neighborhood || city || "";
+                        if (locationSuffix) {
+                            fullAddress = `${streetName} - ${locationSuffix}`;
+                        } else {
+                            fullAddress = streetName;
+                        }
                     }
 
                     return {
                         'Latitude': item.latitude.toFixed(6),
                         'Longitude': item.longitude.toFixed(6),
-                        'Rua': streetName
+                        'Rua': fullAddress
                     };
                 });
 
@@ -1623,22 +1687,34 @@
                     return;
                 }
 
-                let notepadContent = "=== RELATÓRIO DE COORDENADAS ===\n";
-                notepadContent += `Gerado em: ${new Date().toLocaleString('pt-BR')}\n`;
-                notepadContent += `Total de pontos: ${collectedData.length}\n\n`;
+                let notepadContent = "";
+                
+                // Primeiro, todas as coordenadas
+                collectedData.forEach(item => {
+                    notepadContent += `${item.latitude.toFixed(6)}, ${item.longitude.toFixed(6)}\n`;
+                });
 
-                notepadContent += "LATITUDE\t\tLONGITUDE\t\tRUA\n";
-                notepadContent += "=" * 80 + "\n";
-
+                // Depois, todas as ruas
                 collectedData.forEach(item => {
                     const ad = item.addressInfo.address;
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
-
+                    let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
+                    let city = ad.city || ad.town || ad.village || ad.municipality || "";
+                    
+                    let fullAddress = "";
                     if (!streetName) {
-                        streetName = item.isCentral ? "Coordenada Central" : "Rua não identificada";
+                        fullAddress = item.isCentral ? "Coordenada Central" : "Rua não identificada";
+                    } else {
+                        // Adicionar bairro ou cidade ao endereço
+                        let locationSuffix = neighborhood || city || "";
+                        if (locationSuffix) {
+                            fullAddress = `${streetName} - ${locationSuffix}`;
+                        } else {
+                            fullAddress = streetName;
+                        }
                     }
 
-                    notepadContent += `${item.latitude.toFixed(6)}\t\t${item.longitude.toFixed(6)}\t\t${streetName}\n`;
+                    notepadContent += `${fullAddress}\n`;
                 });
 
                 // Criar e baixar arquivo .txt
@@ -1840,19 +1916,28 @@
                     row.style.fontWeight = '600';
                 }
 
-                // Latitude
-                row.insertCell().textContent = data.latitude.toFixed(6);
+                // Coordenadas (Latitude, Longitude)
+                row.insertCell().textContent = `${data.latitude.toFixed(6)}, ${data.longitude.toFixed(6)}`;
 
-                // Longitude
-                row.insertCell().textContent = data.longitude.toFixed(6);
-
-                // Rua
+                // Endereço Detalhado
                 const ad = data.addressInfo.address;
                 let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
+                let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
+                let city = ad.city || ad.town || ad.village || ad.municipality || "";
+                
+                let fullAddress = "";
                 if (!streetName) {
-                    streetName = data.isCentral ? "Coordenada Central" : "Rua não identificada";
+                    fullAddress = data.isCentral ? "Coordenada Central" : "Rua não identificada";
+                } else {
+                    // Adicionar bairro ou cidade ao endereço
+                    let locationSuffix = neighborhood || city || "";
+                    if (locationSuffix) {
+                        fullAddress = `${streetName} - ${locationSuffix}`;
+                    } else {
+                        fullAddress = streetName;
+                    }
                 }
-                row.insertCell().textContent = streetName;
+                row.insertCell().textContent = fullAddress;
             });
         }
 
