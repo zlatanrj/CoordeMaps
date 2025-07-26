@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -487,35 +486,6 @@
             background: rgba(255,255,255,1);
             transform: translateY(-1px);
         }
-
-        /* Estilos para área de arquivos */
-        .file-item {
-            background: rgba(255,255,255,0.7);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 12px;
-            padding: 1rem;
-            transition: all 0.3s ease;
-        }
-        .file-item:hover {
-            background: rgba(255,255,255,0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-        }
-        .file-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            color: white;
-            font-size: 0.75rem;
-        }
-        .drag-over {
-            border-color: #667eea !important;
-            background: rgba(102,126,234,0.1) !important;
-        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -569,7 +539,6 @@
                     </svg>
                     Redes Sociais
                 </button>
-
             </div>
 
             <button id="mobileMenuBtn" class="md:hidden text-white p-2 rounded-lg">
@@ -943,83 +912,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Seção Arquivos -->
-        <section id="arquivos" class="content-section">
-            <div class="container mx-auto max-w-4xl">
-                <div class="card-glass rounded-3xl p-8 md:p-12 shadow-2xl">
-                    <div class="text-center mb-8">
-                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                        </div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Gerenciar Arquivos</h2>
-                        <p class="text-gray-600">Faça upload, visualize e gerencie seus arquivos de forma segura</p>
-                    </div>
-
-                    <!-- Área de Upload -->
-                    <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl mb-8 border-2 border-dashed border-gray-300 transition-all duration-300 hover:border-indigo-400">
-                        <div class="text-center">
-                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                            </svg>
-                            <h3 class="text-lg font-semibold text-gray-700 mb-2">Fazer Upload de Arquivo</h3>
-                            <p class="text-gray-500 mb-4">Arraste e solte arquivos aqui ou clique para selecionar</p>
-                            <input type="file" id="fileInput" multiple accept="*/*" class="hidden">
-                            <button id="selectFileBtn" class="btn btn-primary mb-4">
-                                <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                                </svg>
-                                Selecionar Arquivos
-                            </button>
-                            <div id="uploadProgress" class="hidden">
-                                <div class="bg-gray-200 rounded-full h-2 mb-2">
-                                    <div id="progressBar" class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-                                </div>
-                                <p id="uploadStatus" class="text-sm text-gray-600">Fazendo upload...</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pesquisa e Lista de Arquivos -->
-                    <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl">
-                        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                            <h3 class="text-xl font-semibold text-gray-800">Meus Arquivos</h3>
-                            <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-                                <div class="relative">
-                                    <input 
-                                        type="text" 
-                                        id="fileSearchInput" 
-                                        placeholder="Pesquisar arquivos..." 
-                                        class="form-input w-full md:w-64 pl-10"
-                                    >
-                                    <svg class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                </div>
-                                <button id="refreshFilesList" class="btn btn-secondary whitespace-nowrap">
-                                    <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                                    </svg>
-                                    Atualizar
-                                </button>
-                            </div>
-                        </div>
-
-                        <div id="filesList" class="space-y-3">
-                            <div class="text-center py-8 text-gray-500">
-                                <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                                <p>Nenhum arquivo encontrado</p>
-                                <p class="text-sm">Faça upload de seus primeiros arquivos</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
 
@@ -1057,20 +949,12 @@
                 </div>
                 <span id="welcomeUser" class="text-lg font-medium text-gray-700"></span>
             </div>
-            <div class="flex space-x-3">
-                <button id="filesButton" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2">
-                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                    Arquivos
-                </button>
-                <button id="logoutButton" class="btn btn-tertiary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2">
-                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l4-4-4-4m4 4H9"/>
-                    </svg>
-                    Sair
-                </button>
-            </div>
+            <button id="logoutButton" class="btn btn-tertiary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block mr-2">
+                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l4-4-4-4m4 4H9"/>
+                </svg>
+                Sair
+            </button>
         </div>
 
         <div class="mb-8 text-center">
@@ -1189,82 +1073,6 @@
         </div>
     </div>
 
-    <!-- Modal para gerenciar arquivos -->
-    <div id="filesModal" class="modal">
-        <div class="modal-content" style="max-width: 900px; width: 95%;">
-            <span class="modal-close" onclick="closeFilesModal()">&times;</span>
-            <div class="text-center mb-8">
-                <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl mx-auto mb-4 flex items-center justify-center">
-                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-gray-800 mb-2">Gerenciar Arquivos</h2>
-                <p class="text-gray-600">Faça upload, visualize e gerencie seus arquivos de forma segura</p>
-            </div>
-
-            <!-- Área de Upload -->
-            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl mb-8 border-2 border-dashed border-gray-300 transition-all duration-300 hover:border-indigo-400">
-                <div class="text-center">
-                    <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
-                    </svg>
-                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Fazer Upload de Arquivo</h3>
-                    <p class="text-gray-500 mb-4">Arraste e solte arquivos aqui ou clique para selecionar</p>
-                    <input type="file" id="fileInputModal" multiple accept="*/*" class="hidden">
-                    <button id="selectFileBtnModal" class="btn btn-primary mb-4">
-                        <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        Selecionar Arquivos
-                    </button>
-                    <div id="uploadProgressModal" class="hidden">
-                        <div class="bg-gray-200 rounded-full h-2 mb-2">
-                            <div id="progressBarModal" class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-                        </div>
-                        <p id="uploadStatusModal" class="text-sm text-gray-600">Fazendo upload...</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Pesquisa e Lista de Arquivos -->
-            <div class="bg-white/50 backdrop-blur-sm p-6 rounded-2xl">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
-                    <h3 class="text-xl font-semibold text-gray-800">Meus Arquivos</h3>
-                    <div class="flex flex-col md:flex-row gap-3 w-full md:w-auto">
-                        <div class="relative">
-                            <input 
-                                type="text" 
-                                id="fileSearchInputModal" 
-                                placeholder="Pesquisar arquivos..." 
-                                class="form-input w-full md:w-64 pl-10"
-                            >
-                            <svg class="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                            </svg>
-                        </div>
-                        <button id="refreshFilesListModal" class="btn btn-secondary whitespace-nowrap">
-                            <svg class="w-4 h-4 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
-                            </svg>
-                            Atualizar
-                        </button>
-                    </div>
-                </div>
-
-                <div id="filesListModal" class="space-y-3 max-h-96 overflow-y-auto">
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <p>Nenhum arquivo encontrado</p>
-                        <p class="text-sm">Faça upload de seus primeiros arquivos</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer (visível apenas na navegação) -->
     <footer id="mainFooter" class="bg-black/20 backdrop-blur-lg text-white py-8">
         <div class="container mx-auto px-4 text-center">
@@ -1324,9 +1132,8 @@
     <script>
         // Banco de dados de usuários em memória
         let usersDatabase = {
-            'Debora': 'Midi@10',
-            'Carlos': 'Midi@10',
-            'Wagner': 'Midi@10'
+            'wagner': 'kenya',
+            'admin': '123456'
         };
 
         // Estado de autenticação
@@ -1622,7 +1429,7 @@
                 centralCoordinate = { lat: lat, lng: lon };
 
                 clearRadiusControlMarkers();
-
+                
                 radiusCircle = L.circle([lat, lon], {
                     color: '#4f46e5', fillColor: '#6366f1', fillOpacity: 0.15,
                     radius: selectedRadiusKm * 1000, weight: 2 
@@ -1658,13 +1465,13 @@
                     const centralStreet = centralAd.road || centralAd.pedestrian || centralAd.footway || centralAd.street || "";
                     const centralNeighborhood = centralAd.suburb || centralAd.neighbourhood || centralAd.quarter || centralAd.city_district || "";
                     const centralCity = centralAd.city || centralAd.town || centralAd.village || centralAd.municipality || "";
-
+                    
                     let centralFullAddress = centralStreet;
                     const centralLocationSuffix = centralNeighborhood || centralCity || "";
                     if (centralStreet && centralLocationSuffix) {
                         centralFullAddress = `${centralStreet} - ${centralLocationSuffix}`;
                     }
-
+                    
                     if (centralFullAddress) {
                         const normalizedCentralAddress = centralFullAddress.toLowerCase()
                             .normalize('NFD')
@@ -1806,7 +1613,7 @@
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
                     let city = ad.city || ad.town || ad.village || ad.municipality || "";
-
+                    
                     let fullAddress = "";
                     if (!streetName) {
                         fullAddress = data.isCentral ? "Coordenada Central" : "Rua não identificada";
@@ -1839,7 +1646,7 @@
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
                     let city = ad.city || ad.town || ad.village || ad.municipality || "";
-
+                    
                     let fullAddress = "";
                     if (!streetName) {
                         fullAddress = item.isCentral ? "Coordenada Central" : "Rua não identificada";
@@ -1881,7 +1688,7 @@
                 }
 
                 let notepadContent = "";
-
+                
                 // Primeiro, todas as coordenadas
                 collectedData.forEach(item => {
                     notepadContent += `${item.latitude.toFixed(6)}, ${item.longitude.toFixed(6)}\n`;
@@ -1893,7 +1700,7 @@
                     let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                     let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
                     let city = ad.city || ad.town || ad.village || ad.municipality || "";
-
+                    
                     let fullAddress = "";
                     if (!streetName) {
                         fullAddress = item.isCentral ? "Coordenada Central" : "Rua não identificada";
@@ -2117,7 +1924,7 @@
                 let streetName = ad.road || ad.pedestrian || ad.footway || ad.street || "";
                 let neighborhood = ad.suburb || ad.neighbourhood || ad.quarter || ad.city_district || "";
                 let city = ad.city || ad.town || ad.village || ad.municipality || "";
-
+                
                 let fullAddress = "";
                 if (!streetName) {
                     fullAddress = data.isCentral ? "Coordenada Central" : "Rua não identificada";
@@ -2277,476 +2084,6 @@
 
         // Inicializar com navegação
         showNavigationView();
-
-        // Sistema de gerenciamento de arquivos
-        let filesData = [];
-
-        // Inicializar funcionalidades de arquivo
-        function initializeFileManagement() {
-            const fileInput = document.getElementById('fileInput');
-            const selectFileBtn = document.getElementById('selectFileBtn');
-            const refreshFilesList = document.getElementById('refreshFilesList');
-            const uploadArea = selectFileBtn.closest('.bg-white\\/50');
-            const filesList = document.getElementById('filesList');
-            const uploadProgress = document.getElementById('uploadProgress');
-            const progressBar = document.getElementById('progressBar');
-            const uploadStatus = document.getElementById('uploadStatus');
-
-            // Event listeners
-            selectFileBtn?.addEventListener('click', () => fileInput?.click());
-            fileInput?.addEventListener('change', handleFileSelect);
-            refreshFilesList?.addEventListener('click', loadFilesList);
-
-            // Drag and drop
-            if (uploadArea) {
-                uploadArea.addEventListener('dragover', handleDragOver);
-                uploadArea.addEventListener('dragleave', handleDragLeave);
-                uploadArea.addEventListener('drop', handleFileDrop);
-            }
-
-            // Carregar lista inicial
-            loadFilesList();
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-        }
-
-        function handleFileDrop(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-            const files = Array.from(e.dataTransfer.files);
-            if (files.length > 0) {
-                uploadFiles(files);
-            }
-        }
-
-        function handleFileSelect(e) {
-            const files = Array.from(e.target.files);
-            if (files.length > 0) {
-                uploadFiles(files);
-            }
-        }
-
-        async function uploadFiles(files) {
-            const uploadProgress = document.getElementById('uploadProgress');
-            const progressBar = document.getElementById('progressBar');
-            const uploadStatus = document.getElementById('uploadStatus');
-
-            uploadProgress.classList.remove('hidden');
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const progress = ((i + 1) / files.length) * 100;
-
-                progressBar.style.width = progress + '%';
-                uploadStatus.textContent = `Enviando ${file.name}... (${i + 1}/${files.length})`;
-
-                try {
-                    await saveFileToStorage(file);
-                } catch (error) {
-                    console.error('Erro ao fazer upload:', error);
-                    showModal(`Erro ao fazer upload de ${file.name}: ${error.message}`);
-                }
-            }
-
-            uploadProgress.classList.add('hidden');
-            progressBar.style.width = '0%';
-            document.getElementById('fileInput').value = '';
-            loadFilesList();
-            showModal(`${files.length} arquivo(s) enviado(s) com sucesso!`);
-        }
-
-        async function saveFileToStorage(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    try {
-                        const fileData = {
-                            name: file.name,
-                            type: file.type,
-                            size: file.size,
-                            data: e.target.result,
-                            uploadDate: new Date().toISOString(),
-                            id: generateFileId()
-                        };
-
-                        // Salvar no localStorage (simulando storage)
-                        const existingFiles = JSON.parse(localStorage.getItem('coordemaps_files') || '[]');
-                        existingFiles.push(fileData);
-                        localStorage.setItem('coordemaps_files', JSON.stringify(existingFiles));
-
-                        resolve(fileData);
-                    } catch (error) {
-                        reject(error);
-                    }
-                };
-                reader.onerror = () => reject(new Error('Erro ao ler arquivo'));
-                reader.readAsDataURL(file);
-            });
-        }
-
-        function generateFileId() {
-            return 'file_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
-
-        function loadFilesList() {
-            const filesList = document.getElementById('filesList');
-            if (!filesList) return;
-
-            try {
-                filesData = JSON.parse(localStorage.getItem('coordemaps_files') || '[]');
-                renderFilesList();
-            } catch (error) {
-                console.error('Erro ao carregar arquivos:', error);
-                filesList.innerHTML = '<div class="text-center py-8 text-red-500">Erro ao carregar arquivos</div>';
-            }
-        }
-
-        function renderFilesList() {
-            const filesList = document.getElementById('filesList');
-            if (!filesList) return;
-
-            if (filesData.length === 0) {
-                filesList.innerHTML = `
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <p>Nenhum arquivo encontrado</p>
-                        <p class="text-sm">Faça upload de seus primeiros arquivos</p>
-                    </div>
-                `;
-                return;
-            }
-
-            filesList.innerHTML = filesData.map(file => `
-                <div class="file-item flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="file-icon ${getFileIconColor(file.type)}">
-                            ${getFileExtension(file.name).toUpperCase()}
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-gray-800">${file.name}</h4>
-                            <p class="text-sm text-gray-500">
-                                ${formatFileSize(file.size)} • ${formatDate(file.uploadDate)}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="downloadFile('${file.id}')" class="btn-download bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            Baixar
-                        </button>
-                        <button onclick="deleteFile('${file.id}')" class="btn-delete bg-red-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition-colors">
-                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Excluir
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function getFileIconColor(type) {
-            if (type.startsWith('image/')) return 'bg-green-500';
-            if (type.startsWith('video/')) return 'bg-purple-500';
-            if (type.startsWith('audio/')) return 'bg-yellow-500';
-            if (type.includes('pdf')) return 'bg-red-500';
-            if (type.includes('document') || type.includes('word')) return 'bg-blue-500';
-            if (type.includes('spreadsheet') || type.includes('excel')) return 'bg-green-600';
-            if (type.includes('presentation') || type.includes('powerpoint')) return 'bg-orange-500';
-            return 'bg-gray-500';
-        }
-
-        function getFileExtension(filename) {
-            const ext = filename.split('.').pop();
-            return ext ? ext.toLowerCase() : 'file';
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-        }
-
-        function downloadFile(fileId) {
-            const file = filesData.find(f => f.id === fileId);
-            if (!file) {
-                showModal('Arquivo não encontrado!');
-                return;
-            }
-
-            const link = document.createElement('a');
-            link.href = file.data;
-            link.download = file.name;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        function deleteFile(fileId) {
-            if (confirm('Tem certeza que deseja excluir este arquivo?')) {
-                try {
-                    filesData = filesData.filter(f => f.id !== fileId);
-                    localStorage.setItem('coordemaps_files', JSON.stringify(filesData));
-                    renderFilesList();
-                    showModal('Arquivo excluído com sucesso!');
-                } catch (error) {
-                    console.error('Erro ao excluir arquivo:', error);
-                    showModal('Erro ao excluir arquivo!');
-                }
-            }
-        }
-
-        // Função para enviar notificação por email
-        async function sendLoginNotification(username) {
-            try {
-                const templateParams = {
-                    to_email: 'wagnerzlatan@gmail.com',
-                    subject: 'Novo Login no CoordeMaps',
-                    message: `Usuario logado ( ${username} )`,
-                    from_name: 'Sistema CoordeMaps'
-                };
-
-                await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams);
-                console.log('Notificação de login enviada com sucesso');
-            } catch (error) {
-                console.error('Erro ao enviar notificação de login:', error);
-            }
-        }
-
-        // Funcionalidades do modal de arquivos
-        let filteredFilesData = [];
-
-        function openFilesModal() {
-            const filesModal = document.getElementById('filesModal');
-            if (filesModal) {
-                filesModal.style.display = 'block';
-                initializeFileManagementModal();
-                loadFilesListModal();
-            }
-        }
-
-        function closeFilesModal() {
-            const filesModal = document.getElementById('filesModal');
-            if (filesModal) {
-                filesModal.style.display = 'none';
-            }
-        }
-
-        function initializeFileManagementModal() {
-            const fileInputModal = document.getElementById('fileInputModal');
-            const selectFileBtnModal = document.getElementById('selectFileBtnModal');
-            const refreshFilesListModal = document.getElementById('refreshFilesListModal');
-            const fileSearchInputModal = document.getElementById('fileSearchInputModal');
-            const uploadAreaModal = selectFileBtnModal?.closest('.bg-white\\/50');
-
-            // Event listeners
-            selectFileBtnModal?.addEventListener('click', () => fileInputModal?.click());
-            fileInputModal?.addEventListener('change', handleFileSelectModal);
-            refreshFilesListModal?.addEventListener('click', loadFilesListModal);
-            fileSearchInputModal?.addEventListener('input', handleFileSearchModal);
-
-            // Drag and drop
-            if (uploadAreaModal) {
-                uploadAreaModal.addEventListener('dragover', handleDragOverModal);
-                uploadAreaModal.addEventListener('dragleave', handleDragLeaveModal);
-                uploadAreaModal.addEventListener('drop', handleFileDropModal);
-            }
-        }
-
-        function handleDragOverModal(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('drag-over');
-        }
-
-        function handleDragLeaveModal(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-        }
-
-        function handleFileDropModal(e) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-            const files = Array.from(e.dataTransfer.files);
-            if (files.length > 0) {
-                uploadFilesModal(files);
-            }
-        }
-
-        function handleFileSelectModal(e) {
-            const files = Array.from(e.target.files);
-            if (files.length > 0) {
-                uploadFilesModal(files);
-            }
-        }
-
-        async function uploadFilesModal(files) {
-            const uploadProgressModal = document.getElementById('uploadProgressModal');
-            const progressBarModal = document.getElementById('progressBarModal');
-            const uploadStatusModal = document.getElementById('uploadStatusModal');
-
-            uploadProgressModal.classList.remove('hidden');
-
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                const progress = ((i + 1) / files.length) * 100;
-
-                progressBarModal.style.width = progress + '%';
-                uploadStatusModal.textContent = `Enviando ${file.name}... (${i + 1}/${files.length})`;
-
-                try {
-                    await saveFileToStorage(file);
-                } catch (error) {
-                    console.error('Erro ao fazer upload:', error);
-                    showModal(`Erro ao fazer upload de ${file.name}: ${error.message}`);
-                }
-            }
-
-            uploadProgressModal.classList.add('hidden');
-            progressBarModal.style.width = '0%';
-            document.getElementById('fileInputModal').value = '';
-            loadFilesListModal();
-            showModal(`${files.length} arquivo(s) enviado(s) com sucesso!`);
-        }
-
-        function loadFilesListModal() {
-            try {
-                filesData = JSON.parse(localStorage.getItem('coordemaps_files') || '[]');
-                filteredFilesData = [...filesData];
-                renderFilesListModal();
-            } catch (error) {
-                console.error('Erro ao carregar arquivos:', error);
-                const filesListModal = document.getElementById('filesListModal');
-                if (filesListModal) {
-                    filesListModal.innerHTML = '<div class="text-center py-8 text-red-500">Erro ao carregar arquivos</div>';
-                }
-            }
-        }
-
-        function handleFileSearchModal(e) {
-            const searchTerm = e.target.value.toLowerCase().trim();
-
-            if (searchTerm === '') {
-                filteredFilesData = [...filesData];
-            } else {
-                filteredFilesData = filesData.filter(file => 
-                    file.name.toLowerCase().includes(searchTerm) ||
-                    getFileExtension(file.name).toLowerCase().includes(searchTerm)
-                );
-            }
-
-            renderFilesListModal();
-        }
-
-        function renderFilesListModal() {
-            const filesListModal = document.getElementById('filesListModal');
-            if (!filesListModal) return;
-
-            if (filteredFilesData.length === 0) {
-                const hasSearchTerm = document.getElementById('fileSearchInputModal')?.value.trim() !== '';
-                filesListModal.innerHTML = `
-                    <div class="text-center py-8 text-gray-500">
-                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                        <p>${hasSearchTerm ? 'Nenhum arquivo encontrado com esse termo' : 'Nenhum arquivo encontrado'}</p>
-                        <p class="text-sm">${hasSearchTerm ? 'Tente pesquisar com outros termos' : 'Faça upload de seus primeiros arquivos'}</p>
-                    </div>
-                `;
-                return;
-            }
-
-            filesListModal.innerHTML = filteredFilesData.map(file => `
-                <div class="file-item flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
-                        <div class="file-icon ${getFileIconColor(file.type)}">
-                            ${getFileExtension(file.name).toUpperCase()}
-                        </div>
-                        <div>
-                            <h4 class="font-medium text-gray-800">${file.name}</h4>
-                            <p class="text-sm text-gray-500">
-                                ${formatFileSize(file.size)} • ${formatDate(file.uploadDate)}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button onclick="downloadFile('${file.id}')" class="btn-download bg-blue-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-blue-600 transition-colors">
-                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            Baixar
-                        </button>
-                        <button onclick="deleteFileModal('${file.id}')" class="btn-delete bg-red-500 text-white px-3 py-1 rounded-lg text-sm hover:bg-red-600 transition-colors">
-                            <svg class="w-4 h-4 inline-block mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                            </svg>
-                            Excluir
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function deleteFileModal(fileId) {
-            if (confirm('Tem certeza que deseja excluir este arquivo?')) {
-                try {
-                    filesData = filesData.filter(f => f.id !== fileId);
-                    filteredFilesData = filteredFilesData.filter(f => f.id !== fileId);
-                    localStorage.setItem('coordemaps_files', JSON.stringify(filesData));
-                    renderFilesListModal();
-                    showModal('Arquivo excluído com sucesso!');
-                } catch (error) {
-                    console.error('Erro ao excluir arquivo:', error);
-                    showModal('Erro ao excluir arquivo!');
-                }
-            }
-        }
-
-        // Adicionar event listener para o botão de arquivos
-        document.addEventListener('DOMContentLoaded', function() {
-            const filesButton = document.getElementById('filesButton');
-            if (filesButton) {
-                filesButton.addEventListener('click', openFilesModal);
-            }
-
-            // Fechar modal clicando fora dele
-            window.addEventListener('click', function(event) {
-                const filesModal = document.getElementById('filesModal');
-                if (event.target === filesModal) {
-                    closeFilesModal();
-                }
-            });
-        });
-
-        // Inicializar gerenciamento de arquivos quando necessário
-        document.addEventListener('DOMContentLoaded', function() {
-            // Adicionar listener para quando a seção de arquivos for ativada
-            const originalShowSection = window.showSection;
-            window.showSection = function(sectionId) {
-                originalShowSection(sectionId);
-                if (sectionId === 'arquivos') {
-                    setTimeout(initializeFileManagement, 100);
-                }
-            };
-        });
     </script>
 </body>
 </html>
